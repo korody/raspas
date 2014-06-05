@@ -20,6 +20,11 @@ module ApplicationHelper
     end
   end
 
+  def page_description(description)
+    base_description = "Passe seu conhecimento adiante. Crie, colecione e compartilhe pensamentos com o raspas."
+    description.empty? ? base_description : description
+  end
+
   def logo
   	image_tag("logo.png", :alt => "raspas", :class => "logo")
 	end

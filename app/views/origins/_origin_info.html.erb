@@ -147,7 +147,7 @@
         <div class= "user_info_board round">
           <div class= "last_header">
             <p class="p_tags">usuário</p><p class= "p_tag">citou</p><p class="p_tags">também</p>
-            <p class= "p_mais"><%= link_to "+", origins_user_path(@user), title: "explorar + materiais" %></p>
+            <p class= "p_mais"><%= link_to "+", origins_user_path(@origin_user), title: "explorar + materiais" %></p>
           </div>
           <div>
             <% @user_origins.shuffle.first(4).each do |origin| %>
