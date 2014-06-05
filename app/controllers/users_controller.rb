@@ -13,7 +13,7 @@
 
   def show
     @user = User.find(params[:id])
-    @title = @user.name
+    @title = "Frases de #{@user.name}"
     @new_micropost = Micropost.new
     @microposts = @user.microposts.paginate(page: params[:page])
     @users = User.all
