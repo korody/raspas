@@ -1,3 +1,4 @@
+<% provide :description, "#{@micropost.content} } #{@micropost.author.name if @micropost.author}#{@micropost.user.name unless @micropost.author}" %>
 <div class="user_info">
 	<%= render 'micropost_info' %>
 </div>
