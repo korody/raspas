@@ -38,3 +38,5 @@ gem 'rinku', '~> 1.5.0', require: 'rails_rinku'
 gem 'protected_attributes'
 
 gem 'rails_12factor', group: :production
+
+gem 'unicorn'
