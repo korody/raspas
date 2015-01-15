@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provider: google
+  uid: 123456
+  user: homer
+
+two:
+  provider: facebook
+  uid: 123456
+  user: homer

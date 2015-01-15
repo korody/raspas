@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+homer:
   first_name: Homer
   last_name: Simpson
   username: homer
   display_username: homer
   photo: /path/to/photo
 
-two:
+bart:
   first_name: Bart
   last_name: Simpson
   username: bart

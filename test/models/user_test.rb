@@ -10,6 +10,8 @@ class UserTest < ActiveSupport::TestCase
   should have_db_index(:username).unique(true)
   should have_db_index(:display_username).unique(true)
 
+  should have_many(:authentications)
+
   should validate_presence_of(:first_name)
   should ensure_length_of(:first_name).is_at_most(35)
 
