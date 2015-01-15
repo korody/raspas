@@ -6,6 +6,7 @@ homer:
   username: homer
   display_username: homer
   photo: /path/to/photo
+  email: homer@simpson.com
 
 bart:
   first_name: Bart
@@ -13,3 +14,4 @@ bart:
   username: bart
   display_username: bArT
   photo: /path/to/photo
+  email: bart@simpson.com
