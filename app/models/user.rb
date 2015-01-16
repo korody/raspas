@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include UsesSecurePassword
+  include FriendlyId
 
   validates :name, presence: true, length: { maximum: 60 }
   validates :display_username, presence: true, length: { minimum: 2, maximum: 15 }, uniqueness: { case_sensitive: false }, username_format: true

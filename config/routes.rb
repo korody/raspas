@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'profile/:id', to: 'users#show'
+  post :register, to: 'registrations#create'
+  get :register, to: 'registrations#new'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

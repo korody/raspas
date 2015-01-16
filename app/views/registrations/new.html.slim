@@ -1,0 +1,12 @@
+= form_for @user, url: register_path do |f|
+  = f.text_field :name
+  div
+    = f.text_field :email do
+    p
+      em We can use a JavaScript library to pickup common email errors
+  div
+    = f.text_field :display_username do
+    p
+      em A username helps people contact you using @yourusername
+  = f.password_field :password
+  = f.submit
