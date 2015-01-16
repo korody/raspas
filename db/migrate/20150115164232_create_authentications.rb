@@ -6,6 +6,15 @@ class CreateAuthentications < ActiveRecord::Migration
       t.string :provider, null: false
       t.string :uid, null: false
 
+      t.string :info
+
+      t.string :token
+      t.string :secret
+      t.boolean :expires
+      t.timestamp :expires_at
+
+      t.string :extra
+
       t.timestamps null: false
     end
     add_index :authentications, :user_id

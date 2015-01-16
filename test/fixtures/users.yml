@@ -1,17 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 homer:
-  first_name: Homer
-  last_name: Simpson
+  name: Homer Simpson
+  email: homer@simpson.com
   username: homer
   display_username: homer
-  photo: /path/to/photo
-  email: homer@simpson.com
+  image: /path/to/photo
 
 bart:
-  first_name: Bart
-  last_name: Simpson
+  name: Bart Simpson
+  email: bart@simpson.com
   username: bart
   display_username: bArT
-  photo: /path/to/photo
-  email: bart@simpson.com
+  image: /path/to/photo

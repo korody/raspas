@@ -3,9 +3,21 @@
 one:
   provider: google
   uid: 123456
+  info:
+  token:
+  secret:
+  expires:
+  expires_at:
+  extra:
   user: homer
 
 two:
   provider: facebook
   uid: 123456
+  info:
+  token:
+  secret:
+  expires:
+  expires_at:
+  extra:
   user: homer
