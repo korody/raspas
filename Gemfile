@@ -48,6 +48,10 @@ end
 gem 'slim-rails'
 gem 'rails-i18n'
 
+# Auto prefixer is a Bootstrap dependency for adding vendor prefixed CSS
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
+
 group :development do
   gem 'quiet_assets'
   gem 'guard'

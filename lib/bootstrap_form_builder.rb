@@ -5,11 +5,11 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     define_method(method_name) do |name, *args|
       content_tag :div, class: 'form-group' do
         options = args.extract_options!
-        if options[:show_label]
-          field_label(name, options) + super(name, options) + errors_for(name)
-        else
+        if options[:hide_label]
           options.reverse_merge!(placeholder: object.class.human_attribute_name(name))
           super(name, options) + errors_for(name)
+        else
+          field_label(name, options) + super(name, options) + errors_for(name)
         end
       end
     end
@@ -22,7 +22,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 private
 
   def field_label(name, options)
-    label name, options[:label], class: 'required-field' if required_field?(name)
+    label(name, options[:label], class: ('required-field' if required_field?(name)))
   end
 
   def errors_for(name)

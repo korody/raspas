@@ -1,0 +1,5 @@
+pt-BR:
+  controllers:
+    registrations:
+      create:
+        failure: "There was a problem with your registration. Please check the form for any errors."

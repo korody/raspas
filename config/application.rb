@@ -25,5 +25,8 @@ module Identity
 
     # Autoload lib directory
     config.autoload_paths << Rails.root.join('lib')
+
+    # Force SSL by defailt
+    config.force_ssl = false
   end
 end
