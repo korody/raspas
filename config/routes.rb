@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'profile/:id', to: 'users#show'
+  get 'profile/:id', to: 'users#show', as: :profile
+
   post :register, to: 'registrations#create'
   get :register, to: 'registrations#new'
 

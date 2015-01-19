@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to register_path
+      redirect_to profile_path(@user)
     else
       flash.now[:notice] = "Ooops!"
       render :new
