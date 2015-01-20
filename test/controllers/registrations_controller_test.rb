@@ -23,7 +23,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_difference 'User.count' do
       post :create, user: { name: 'Marg Simspon', email: 'marg@simpson.com', display_username: 'marg', password: '123456' }
     end
-    # This may need to be changed once we decide what is happening
-    assert_redirected_to profile_path(User.last)
+
+    assert_redirected_to profile_path
   end
 end

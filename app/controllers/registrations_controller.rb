@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       log_in @user
-      redirect_to profile_path(@user)
+      redirect_to profile_path
     else
       flash.now[:danger] = i18n_message_for :failure
       render :new

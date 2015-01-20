@@ -1,0 +1,6 @@
+header
+  - if logged_in?
+    = link_to "Profile", profile_path
+  - else
+    = link_to "Login", login_path
+

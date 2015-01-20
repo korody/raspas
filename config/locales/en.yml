@@ -19,7 +19,15 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 en:
+  activerecord:
+    attributes:
+      user:
+        display_username: Username
   controllers:
     registrations:
       create:
         failure: "There was a problem with your registration. Please check the form for any errors."
+  helpers:
+    submit:
+      user:
+        create: "Register"

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'profile/:id', to: 'users#show', as: :profile
+  resource :profile, only: [:show, :edit, :update], controller: :users
+
+  get :login, to: 'sessions#new'
 
   post :register, to: 'registrations#create'
   get :register, to: 'registrations#new'

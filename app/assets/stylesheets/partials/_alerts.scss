@@ -1,3 +1,5 @@
 .alert-full-page {
+  // Alerts are fixed to the top of the page, so their border radius must be set to 0
+  // and independent of whether we use border radius in the rest of the app.
   border-radius: 0;
 }

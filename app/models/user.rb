@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   include UsesSecurePassword
-  include FriendlyId
 
   validates :name, presence: true, length: { maximum: 60 }
   validates :display_username, presence: true, length: { minimum: 2, maximum: 15 }, uniqueness: { case_sensitive: false }, username_format: true
@@ -11,6 +10,10 @@ class User < ActiveRecord::Base
   uses_secure_password validate: false
 
   before_save :set_username, :downcase_email
+
+  def to_param
+    display_username
+  end
 
 private
 

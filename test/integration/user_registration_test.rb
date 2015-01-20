@@ -21,7 +21,7 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
       post_via_redirect '/register', user: { name: 'Nelson Muntz', email: 'nelson@muntz.com', display_username: 'nmuntz', password: "nelSonM" }
     end
 
-    assert_equal '/profile/nmuntz', path
+    assert_equal '/profile', path
 
     assert_not_nil session[:user_id]
     assert_equal User.last.id, session[:user_id]
