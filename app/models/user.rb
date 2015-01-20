@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
 
   before_save :set_username, :downcase_email
 
+  def self.from_omniauth(auth)
+    where(email: auth.info.email).first_or_create! do |user|
+      user.email = auth.info.email
+      user.name = auth.info.name
+      user.image = auth.extra.raw_info.image
+    end
+  end
+
 private
 
   def set_username
