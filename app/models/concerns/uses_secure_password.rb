@@ -62,6 +62,10 @@ module UsesSecurePassword
     def new_token
       SecureRandom.urlsafe_base64
     end
+
+    def find_by_email_or_username(value)
+      User.where("email = ? OR username = ?", value, value).first
+    end
   end
 
   extend ClassMethods

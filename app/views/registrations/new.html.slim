@@ -1,11 +1,25 @@
 section class="centered-page"
   header class="text-center"
     h1 Nimbus
-    p.lead Sign up to Nimbus
+    p class="lead" Sign up to Nimbus
   div class="form-wrapper"
+    div class="row"
+      div class="col-sm-12 social-signup"
+        div class="social-signup__link"
+          = link_to "Sign up with Google", '#', class: 'btn btn-danger btn-block btn-lg'
+        div class="social-signup__link"
+          = link_to "Sign up with Facebook", '#', class: 'btn btn-primary btn-block btn-lg'
+
+        p class="lead text-center" or
+        //div class="social-signup__link"
+          = link_to "Sign up with your Email Address", '#', class: 'btn btn-default btn-block btn-lg', data: { toggle: 'sign-up-form' }
+
+    h4 class="text-center" Sign up using email
+    br
     = form_for @user, url: register_path do |f|
       = f.text_field :name, class: 'form-control'
       = f.text_field :email, class: 'form-control'
       = f.text_field :display_username, class: 'form-control'
       = f.password_field :password, class: 'form-control'
       = f.submit class: 'btn btn-success btn-lg btn-block'
+  p class="text-center" Already have an account? #{link_to "Login in", login_path}.

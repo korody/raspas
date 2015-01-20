@@ -27,6 +27,9 @@ en:
     registrations:
       create:
         failure: "There was a problem with your registration. Please check the form for any errors."
+    sessions:
+      create:
+        failure: "The email or password you entered is incorrect."
   helpers:
     submit:
       user:
