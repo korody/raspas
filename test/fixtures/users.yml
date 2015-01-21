@@ -6,7 +6,7 @@ homer:
   username: homer
   display_username: homer
   image: /path/to/photo
-  password_digest: $2a$10$8uCZ9wCTsFoqa0aIfpssne4qtchcpqhepdU5WylZwh4GBAkgFWEYe
+  password_digest: <%= BCrypt::Password.create('donuts', cost: 4) %>
 
 bart:
   name: Bart Simpson
@@ -14,4 +14,4 @@ bart:
   username: bart
   display_username: bArT
   image: /path/to/photo
-  password_digest: $2a$10$8uCZ9wCTsFoqa0aIfpssne4qtchcpqhepdU5WylZwh4GBAkgFWEYe
+  password_digest: <%= BCrypt::Password.create('donuts', cost: 4) %>

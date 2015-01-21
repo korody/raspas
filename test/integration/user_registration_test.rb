@@ -2,8 +2,7 @@ require 'test_helper'
 
 class UserRegistrationTest < ActionDispatch::IntegrationTest
   test "register with invalid information" do
-    get '/register'
-    assert_response :success
+    go_to '/register', template: :new
 
     assert_no_difference 'User.count' do
       post_via_redirect '/register', user: { name: 'Nelson Muntz', email: 'nelson@muntz.com' }
@@ -14,15 +13,13 @@ class UserRegistrationTest < ActionDispatch::IntegrationTest
   end
 
   test "register with valid information" do
-    get '/register'
-    assert_response :success
+    go_to '/register', template: :new
 
     assert_difference 'User.count' do
       post_via_redirect '/register', user: { name: 'Nelson Muntz', email: 'nelson@muntz.com', display_username: 'nmuntz', password: "nelSonM" }
     end
 
     assert_equal '/profile', path
-
     assert_not_nil session[:user_id]
     assert_equal User.last.id, session[:user_id]
   end
