@@ -5,10 +5,4 @@ class AuthenticationsControllerTest < ActionController::TestCase
     get :failure
     assert_response :redirect
   end
-
-  test "should logout" do
-    post :destroy
-    assert_response :redirect
-    assert_nil assigns(:user)
-  end
 end
