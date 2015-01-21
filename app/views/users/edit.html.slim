@@ -1,1 +1,5 @@
-h1 Users#edit
+section class="centered-page"
+  header class="text-center"
+    h1 Edit Profile
+  = form_for @user, url: profile_path do |f|
+    = render 'registrations/user_fields', f: f

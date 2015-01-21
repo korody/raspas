@@ -34,3 +34,4 @@ en:
     submit:
       user:
         create: "Register"
+        update: "Update Account"

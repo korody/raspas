@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RoutesTest < ActionController::TestCase
-  should route(:get, 'auth/google/callback').to(controller: :authentications, action: :create, provider: 'google')
+  should route(:get, '/auth/google/callback').to(controller: :authentications, action: :create, provider: 'google')
   should route(:get, '/auth/failure').to(controller: :authentications, action: :failure)
 
   should route(:post, '/login').to(controller: :sessions, action: :create)

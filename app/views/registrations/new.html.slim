@@ -17,9 +17,5 @@ section class="centered-page"
     h4 class="text-center" Sign up using email
     br
     = form_for @user, url: register_path do |f|
-      = f.text_field :name, class: 'form-control'
-      = f.text_field :email, class: 'form-control'
-      = f.text_field :display_username, class: 'form-control'
-      = f.password_field :password, class: 'form-control'
-      = f.submit class: 'btn btn-success btn-lg btn-block'
+      = render 'registrations/user_fields', f: f
   p class="text-center" Already have an account? #{link_to "Login in", login_path}.
