@@ -1,2 +1,6 @@
 h1 = @user.name
-= session[:user_id]
+div class="col-sm-3 social-signup"
+  div class="social-signup__link"
+    = link_to "connect with Google", '/auth/google', class: 'btn btn-danger btn-block btn-lg'
+  div class="social-signup__link"
+    = link_to "connect with Facebook", '/auth/facebook', class: 'btn btn-primary btn-block btn-lg'

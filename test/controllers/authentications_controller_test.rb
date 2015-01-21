@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class AuthenticationsControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "should get failure" do
     get :failure
     assert_response :redirect

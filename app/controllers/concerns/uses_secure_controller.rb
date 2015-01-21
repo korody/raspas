@@ -17,9 +17,9 @@ module UsesSecureController
 
   def current_user
     if user_id = session[:user_id]
-      @current_user ||= User.find_by(id: user_id)
+      @current_user ||= User.find(user_id)
     elsif user_id = cookies.signed[:user_id]
-      user = User.find_by(id: user_id)
+      user = User.find(user_id)
       if user && user.authenticated?(:remember_digest, cookies[:remember_token])
         log_in user
         @current_user = user
@@ -46,7 +46,7 @@ module UsesSecureController
   def ensure_logged_in
     unless logged_in?
       store_location
-      redirect_to log_in_path
+      redirect_to login_path
     end
   end
 
@@ -55,9 +55,8 @@ module UsesSecureController
   end
 
   def redirect_back_or(default)
-    location = session[:forwarding_url] || default
+    location = session.delete(:forwarding_url) || default
     redirect_to(location, success: t('success', scope: [:controllers, :sessions, :create]))
-    session.delete(:forwarding_url)
   end
 
   def store_location

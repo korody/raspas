@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
+  post :register, to: 'registrations#create'
+  get :register, to: 'registrations#new'
+
   get 'auth/:provider/callback', to: 'authentications#create'
   get 'auth/failure', to: 'authentications#failure'
 
-  get :login, to: 'authentications#new'
-  post :login, to: 'authentications#create'
+  post :login, to: 'sessions#create'
+  get :login, to: 'sessions#new'
   delete :logout, to: 'authentications#destroy'
 
-  get 'profile/:id', to: 'users#show', as: :profile
-
-  post :register, to: 'registrations#create'
-  get :register, to: 'registrations#new'
+  resource :profile, only: [:show, :edit, :update], controller: :users
 end

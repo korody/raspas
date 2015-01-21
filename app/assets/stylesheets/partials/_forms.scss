@@ -1,6 +1,7 @@
 .form-wrapper {
   border: 1px solid $gray-lighter;
-  padding: 20px;
+  margin: 30px 0;
+  padding: 30px;
 }
 
 .form-group {
@@ -17,5 +18,12 @@
 
   .error-message {
     color: $brand-danger;
+  }
+}
+
+.social-signup {
+
+  &__link:not(:last-child) {
+    margin-bottom: 20px;
   }
 }
