@@ -23,9 +23,36 @@ class OmniauthAuthenticationTest < ActionDispatch::IntegrationTest
   test "signup with valid information" do
     get '/login'
     assert_response :success
-    get_via_redirect '/auth/google'
-    assert_template 'registrations/new'
-#     assert_not_nil session[:user_id]
-#     assert_equal User.last.id, session[:user_id]
+
+    assert_difference 'Authentication.count' do
+      get_via_redirect '/auth/google'
+    end
+
+    assert_template 'authentications/new'
+
+    assert_difference 'User.count' do
+      post_via_redirect '/authenticate', user: { name: 'Elvis Presley', email: 'elvis@graceland.com', display_username: 'elvisthepelvis', password: "rocking" }
+    end
+
+    assert_not_nil session[:user_id]
+    assert_equal User.last.id, session[:user_id]
+  end
+
+  test "signup with invalid information" do
+    get '/login'
+    assert_response :success
+
+    assert_difference 'Authentication.count' do
+      get_via_redirect '/auth/google'
+    end
+
+    assert_template 'authentications/new'
+
+    assert_no_difference 'User.count' do
+      post_via_redirect '/authenticate', user: { name: 'Elvis Presley', email: 'elvis@graceland.com' }
+    end
+
+    assert_equal '/authenticate', path
+    refute session[:user_id]
   end
 end

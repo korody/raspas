@@ -36,13 +36,31 @@ class AuthenticationsController < ApplicationController
           log_in @user
           redirect_to profile_path(current_user), success: "bem-vindo(a) ao Nimbus!"
         else
-          render 'registrations/new'
+          render 'authentications/new'
         end
       end
     end
   end
 
+  def complete_registration
+    @user = User.new(user_params)
+
+    if @user.save
+      log_in @user
+      redirect_to profile_path
+    else
+      flash.now[:danger] = i18n_message_for :failure
+      render :new
+    end
+  end
+
   def failure
     redirect_to register_path, danger: "ops! Não foi possível conectar no momento."
+  end
+
+private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :display_username, :password)
   end
 end

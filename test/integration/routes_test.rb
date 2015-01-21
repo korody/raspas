@@ -4,6 +4,9 @@ class RoutesTest < ActionController::TestCase
   should route(:get, 'auth/google/callback').to(controller: :authentications, action: :create, provider: 'google')
   should route(:get, '/auth/failure').to(controller: :authentications, action: :failure)
 
+  should route(:post, 'authenticate').to(controller: :authentications, action: :complete_registration)
+  should route(:get, 'authenticate').to(controller: :authentications, action: :new)
+
   should route(:post, '/login').to(controller: :sessions, action: :create)
   should route(:get, '/login').to(controller: :sessions, action: :new)
 

@@ -1,0 +1,13 @@
+section class="centered-page"
+  header class="text-center"
+    h1 Olá #{@user.name}!
+    p class="lead" Por favor, confirme suas informações abaixo:
+  div class="form-wrapper"
+    = form_for @user, url: authenticate_path do |f|
+      = f.text_field :name, class: 'form-control'
+      = f.text_field :email, class: 'form-control'
+      = f.text_field :display_username, class: 'form-control'
+      p class="help-block" Adicione um nome de usuário para seu id único do Nimbus.
+      = f.password_field :password, class: 'form-control'
+      p class="help-block" Adicione uma senha para proteger sua conta.
+      = f.submit "Estou pronto", class: 'btn btn-success btn-lg btn-block'
