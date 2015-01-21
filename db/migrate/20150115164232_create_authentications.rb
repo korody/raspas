@@ -1,7 +1,7 @@
 class CreateAuthentications < ActiveRecord::Migration
   def change
     create_table :authentications do |t|
-      t.belongs_to :user, null: false
+      t.belongs_to :user
 
       t.string :provider, null: false
       t.string :uid, null: false

@@ -52,6 +52,10 @@ gem 'rails-i18n'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
 group :development do
   gem 'quiet_assets'
   gem 'guard'
