@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(email: auth.info.email).first_or_create do |user|
+    where(email: auth.info.email).first_or_initialize do |user|
       user.email = auth.info.email
       user.name = auth.info.name
       user.image = auth.extra.raw_info.image

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   resource :profile, only: [:show, :edit, :update], controller: :users
 
-  get 'auth/:provider/callback', to: 'authentications#create'
-  get 'auth/failure', to: 'authentications#failure'
+  get '/auth/:provider/callback', to: 'authentications#create'
+  get '/auth/failure', to: 'authentications#failure'
 
   post :register, to: 'registrations#create'
   get :register, to: 'registrations#new'
 
+  post :authenticate, to: 'authentications#complete_registration'
+  get :authenticate, to: 'authentications#new'
+  
   delete :logout, to: 'sessions#destroy'
   post :login, to: 'sessions#create'
   get :login, to: 'sessions#new'
