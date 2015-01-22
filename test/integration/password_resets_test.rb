@@ -66,4 +66,17 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_not_nil @user.reset_digest
     assert_not_nil @user.reset_sent_at
   end
+
+  test "requesting a password reset with correct email or username in uppercase should process request" do
+    go_to '/password_reset', template: 'password_resets/new'
+
+    assert_nil @user.reset_digest
+    assert_nil @user.reset_sent_at
+
+    post_via_redirect '/password_reset', email_or_username: @user.username.upcase
+    @user.reload
+
+    assert_not_nil @user.reset_digest
+    assert_not_nil @user.reset_sent_at
+  end
 end
