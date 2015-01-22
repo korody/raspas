@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email_or_username(params[:email_or_username])
+    user = User.find_by_email_or_username(sanitized_input)
     if user && user.authenticate(params[:password])
       log_in user
       redirect_back_or profile_path, message: i18n_message_for(:success)
@@ -18,5 +18,11 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     redirect_to login_path, success: i18n_message_for(:success)
+  end
+
+private
+
+  def sanitized_input
+    params[:email_or_username].downcase.strip if params[:email_or_username].present?
   end
 end

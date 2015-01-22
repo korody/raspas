@@ -21,7 +21,6 @@ class ActiveSupport::TestCase
     assert_not_nil session[:user_id]
     assert_equal user.id, session[:user_id]
 
-    go_to '/profile/edit', template: :edit
     user
   end
 end

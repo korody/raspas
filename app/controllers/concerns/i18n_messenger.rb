@@ -1,6 +1,6 @@
 module I18nMessenger
-  def i18n_message_for(key)
-    t key, scope: scope
+  def i18n_message_for(key, **args)
+    t(key, scope: scope, **args)
   end
 
 private

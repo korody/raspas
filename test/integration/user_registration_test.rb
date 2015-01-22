@@ -1,19 +1,19 @@
 require 'test_helper'
 
 class UserRegistrationTest < ActionDispatch::IntegrationTest
-  test "register with invalid information" do
-    go_to '/register', template: :new
+  test "user should not register with bad information" do
+    go_to '/register', template: 'registrations/new'
 
     assert_no_difference 'User.count' do
       post_via_redirect '/register', user: { name: 'Nelson Muntz', email: 'nelson@muntz.com' }
     end
 
     assert_equal '/register', path
-    refute session[:user_id]
+    assert_nil session[:user_id]
   end
 
-  test "register with valid information" do
-    go_to '/register', template: :new
+  test "use should register with valid information" do
+    go_to '/register', template: 'registrations/new'
 
     assert_difference 'User.count' do
       post_via_redirect '/register', user: { name: 'Nelson Muntz', email: 'nelson@muntz.com', display_username: 'nmuntz', password: "nelSonM" }

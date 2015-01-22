@@ -14,4 +14,4 @@ section class="centered-page"
     = form_for @user, url: register_path do |f|
       = render 'registrations/user_fields', f: f
 
-  p class="text-center" Already have an account? #{link_to "Login in", login_path}.
+  p class="text-center" Already have an account? #{link_to "Log in", login_path}.

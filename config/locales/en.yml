@@ -22,11 +22,16 @@ en:
   activerecord:
     attributes:
       user:
-        display_username: Username
+        display_username: "Username"
   controllers:
     registrations:
       create:
         failure: "There was a problem with your registration. Please check the form for any errors."
+    password_resets:
+      create:
+        success: "An email with instructions was sent to %{email}."
+        user_not_found: "We could not find %{email} in our system."
+        value_not_provided: "Please enter a username or an email address."
     sessions:
       create:
         failure: "The email or password you entered is incorrect."
