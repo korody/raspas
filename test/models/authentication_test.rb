@@ -19,12 +19,4 @@ class AuthenticationTest < ActiveSupport::TestCase
 
   should validate_presence_of(:provider)
   should validate_presence_of(:uid)
-
-  def setup
-    @authentication = Authentication.new(provider: 'google', uid: '123456')
-  end
-
-  test "auth should be valid" do
-    assert @authentication.valid?
-  end
 end

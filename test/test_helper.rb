@@ -13,4 +13,15 @@ class ActiveSupport::TestCase
     assert_response :success
     assert_template template if template
   end
+
+  def login(user)
+    user = users(user)
+    post_via_redirect '/login', email_or_username: user.username, password: 'donuts'
+
+    assert_not_nil session[:user_id]
+    assert_equal user.id, session[:user_id]
+
+    go_to '/profile/edit', template: :edit
+    user
+  end
 end

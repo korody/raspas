@@ -3,16 +3,16 @@ class Authentication < ActiveRecord::Base
 
   belongs_to :user
 
-  def self.with_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |authentication|
-      authentication.provider = auth.provider
-      authentication.uid = auth.uid
-      authentication.info = auth.info
-      authentication.token = auth.credentials.token
-      authentication.secret = auth.credentials.secret
-      authentication.expires = auth.credentials.expires
-      authentication.expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
-      authentication.extra = auth.extra
+  def self.create_from_omniauth(auth_hash)
+    where(provider: auth_hash.provider, uid: auth_hash.uid).first_or_create do |new_auth|
+      new_auth.provider = auth_hash.provider
+      new_auth.uid  = auth_hash.uid
+      new_auth.info = auth_hash.info
+      new_auth.token = auth_hash.credentials.token
+      new_auth.secret = auth_hash.credentials.secret
+      new_auth.expires = auth_hash.credentials.expires
+      new_auth.expires_at = Time.at(auth_hash.credentials.expires_at) if auth_hash.credentials.expires_at.present?
+      new_auth.extra = auth_hash.extra
     end
   end
 end

@@ -15,10 +15,11 @@ class User < ActiveRecord::Base
     display_username
   end
 
-  def self.from_omniauth(auth)
+  def self.initialize_from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |user|
       user.email = auth.info.email
       user.name = auth.info.name
+      user.display_username = auth.info.nickname if auth.info.nickname.present?
       user.image = auth.extra.raw_info.image
     end
   end

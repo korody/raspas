@@ -10,7 +10,7 @@ module UsesSecureController
   end
 
   def log_out
-    forget(current_user)
+    forget(current_user) if current_user
     session.delete(:user_id)
     @current_user = nil
   end
@@ -51,12 +51,12 @@ module UsesSecureController
   end
 
   def ensure_logged_out
-    redirect_to root_path if logged_in?
+    redirect_to profile_path if logged_in?
   end
 
-  def redirect_back_or(default)
+  def redirect_back_or(default, message: nil)
     location = session.delete(:forwarding_url) || default
-    redirect_to(location, success: t('success', scope: [:controllers, :sessions, :create]))
+    redirect_to location, success: message
   end
 
   def store_location

@@ -1,5 +1,16 @@
 pt-BR:
   controllers:
+    authentications:
+      create:
+        authentication_added: "Perfil vinculado."
+        authentication_exists: "Este perfil já está vinculado."
+        welcome_back: "Bem-vindo(a) de volta."
     registrations:
       create:
-        failure: "There was a problem with your registration. Please check the form for any errors."
+        failure:
+    sessions:
+      create:
+        failure:
+        success:
+      destroy:
+        success: "Até breve!"

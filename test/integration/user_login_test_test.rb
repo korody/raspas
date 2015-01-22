@@ -39,6 +39,26 @@ class UserLoginTestTest < ActionDispatch::IntegrationTest
     assert_nil session[:user_id]
   end
 
+  test "user tries to login while logged in" do
+    user = login(:homer)
+
+    get '/login'
+    follow_redirect!
+
+    assert_response :success
+    assert_equal '/profile', path
+    assert_template :show
+  end
+
+  test "user logs out" do
+    login(:homer)
+    delete_via_redirect '/logout'
+
+    assert_nil session[:user_id]
+    assert_equal '/login', path
+    assert_template :new
+  end
+
 private
 
   def go_to_login

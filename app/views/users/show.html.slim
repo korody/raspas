@@ -6,13 +6,7 @@ section class="centered-page"
       div class="user-card__info-wrapper"
         h1 class="user-card__name" = @user.name
         p class="user-card__info" #{@user.email} / @#{@user.username}
-  br
+
   div class="text-center"
     p = link_to "Edit Profile", edit_profile_path, class: 'btn btn-primary'
-    p = link_to "Logout", logout_path, class: 'btn btn-danger'
-
-//  div class="social-signup"
-    div class="social-signup__link"
-      = link_to "connect with Google", '/auth/google', class: 'btn btn-danger btn-block btn-lg'
-    div class="social-signup__link"
-      = link_to "connect with Facebook", '/auth/facebook', class: 'btn btn-primary btn-block btn-lg'
+    p = link_to "Logout", logout_path, method: :delete, class: 'btn btn-danger'
