@@ -31,9 +31,7 @@ class OmniauthAuthenticationTest < ActionDispatch::IntegrationTest
     assert_template 'authentications/new'
 
     assert_difference 'User.count' do
-      post_via_redirect '/authenticate', user: {
-        name: 'Elvis Presley', email: 'elvis@graceland.com', display_username: 'elvisthepelvis', password: "rocking"
-      }
+      post_via_redirect '/authenticate', user: { name: 'Elvis Presley', email: 'elvis@graceland.com', display_username: 'elvisthepelvis', password: "rocking" }
     end
 
     assert_not_nil session[:user_id]
