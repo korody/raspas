@@ -13,4 +13,6 @@ class RoutesTest < ActionController::TestCase
 
   should route(:post, '/register').to(controller: :registrations, action: :create)
   should route(:get, '/register').to(controller: :registrations, action: :new)
+
+  should route(:get, '/').to(controller: :sessions, action: :new)
 end

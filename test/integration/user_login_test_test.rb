@@ -7,7 +7,7 @@ class UserLoginTestTest < ActionDispatch::IntegrationTest
 
   test "user logs in with email" do
     go_to_login
-    post_via_redirect '/login', username: @user.email, password: 'donuts'
+    post_via_redirect '/login', email_or_username: @user.email, password: 'donuts'
 
     assert_equal '/profile', path
     assert_not_nil session[:user_id]
@@ -16,7 +16,7 @@ class UserLoginTestTest < ActionDispatch::IntegrationTest
 
   test "user logs in with username" do
     go_to_login
-    post_via_redirect '/login', username: @user.username, password: 'donuts'
+    post_via_redirect '/login', email_or_username: @user.username, password: 'donuts'
 
     assert_equal '/profile', path
     assert_not_nil session[:user_id]
@@ -25,7 +25,7 @@ class UserLoginTestTest < ActionDispatch::IntegrationTest
 
   test "user logs in with bad password" do
     go_to_login
-    post_via_redirect '/login', username: @user.username, password: 'bad password'
+    post_via_redirect '/login', email_or_username: @user.username, password: 'bad password'
 
     assert_equal '/login', path
     assert_nil session[:user_id]
@@ -33,7 +33,7 @@ class UserLoginTestTest < ActionDispatch::IntegrationTest
 
   test "user logs in with bad email or username" do
     go_to_login
-    post_via_redirect '/login', username: 'bad@email.com', password: @user.password
+    post_via_redirect '/login', email_or_username: 'bad@email.com', password: @user.password
 
     assert_equal '/login', path
     assert_nil session[:user_id]

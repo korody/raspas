@@ -38,7 +38,7 @@ module UsesSecureController
   end
 
   def forget(user)
-#     user.forget
+    user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end

@@ -2,24 +2,22 @@ section class="centered-page"
   header class="text-center"
     h1 Nimbus
     p class="lead" Sign in to Nimbus
+
   div class="form-wrapper"
-    div class="row"
-      div class="col-sm-12 social-signup"
-        div class="social-signup__link"
-          = link_to "Sign in with Google", '/auth/google', class: 'btn btn-danger btn-block btn-lg'
-        div class="social-signup__link"
-          = link_to "Sign in with Facebook", '/auth/facebook', class: 'btn btn-primary btn-block btn-lg'
+    div class="social-signup__link"
+      = link_to "Sign in with Google", '/auth/google', class: 'btn btn-danger btn-block btn-lg'
+    div class="social-signup__link"
+      = link_to "Sign in with Facebook", '/auth/facebook', class: 'btn btn-primary btn-block btn-lg'
+    p class="lead text-center" or
 
-        p class="lead text-center" or
-
-    h4 class="text-center" Sign in with your email address
-    br
+    h3 class="text-center" Sign in with Your Email Address
     = form_tag login_path do
       div class="form-group"
-        = label_tag :username, "Email address or username"
-        = text_field_tag :username, params[:username], class: 'form-control'
+        = label_tag :username, "Email or Username"
+        = text_field_tag :emal_or_username, params[:email_or_username], class: 'form-control'
       div class="form-group"
         = label_tag :password
         = password_field_tag :password, nil, class: 'form-control'
       = submit_tag "Login", class: 'btn btn-success btn-lg btn-block'
+
   p class="text-center" Don't have' an account? #{link_to "Sign up", register_path}.

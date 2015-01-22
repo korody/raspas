@@ -30,8 +30,12 @@ en:
     sessions:
       create:
         failure: "The email or password you entered is incorrect."
+    users:
+      update:
+        failure: "There was a problem with your form. Please check the form for errors."
+        success: "Your profile was updated successfully."
   helpers:
     submit:
       user:
         create: "Register"
-        update: "Update Account"
+        update: "Update Profile"
