@@ -4,7 +4,7 @@ class Authentication < ActiveRecord::Base
   belongs_to :user
 
   def self.create_from_omniauth(auth_hash)
-    where(provider: auth_hash.provider, uid: auth_hash.uid).first_or_create do |new_auth|
+    where(provider: auth_hash.provider, uid: auth_hash.uid).first_or_create! do |new_auth|
       new_auth.provider = auth_hash.provider
       new_auth.uid  = auth_hash.uid
       new_auth.info = auth_hash.info
