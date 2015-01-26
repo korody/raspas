@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class RoutesTest < ActionController::TestCase
-  should route(:post, '/password_reset').to(controller: :password_resets, action: :create)
-  should route(:get, '/password_reset').to(controller: :password_resets, action: :new)
+  should route(:patch, '/password_resets/123').to(controller: :password_resets, action: :update, id: 123)
+  should route(:get, '/password_resets/123/edit').to(controller: :password_resets, action: :edit, id: 123)
+  should route(:post, '/password_resets').to(controller: :password_resets, action: :create)
+  should route(:get, '/password_resets/new').to(controller: :password_resets, action: :new)
 
   should route(:get, '/auth/google/callback').to(controller: :authentications, action: :create, provider: 'google')
   should route(:get, '/auth/failure').to(controller: :authentications, action: :failure)

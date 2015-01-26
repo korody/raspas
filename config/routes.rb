@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   resource :profile, only: [:show, :edit, :update], controller: :users
 
-  # resources :password_resets, only: [:edit, :update]
-  post :password_reset, to: 'password_resets#create'
-  get :password_reset, to: 'password_resets#new'
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/auth/failure', to: 'authentications#failure'
