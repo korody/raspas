@@ -1,19 +1,17 @@
 class PasswordResetsController < ApplicationController
   before_action :ensure_logged_out
+  before_action :validate_email_or_username, only: :create
 
   def new
   end
 
   def create
-    if sanitize_input.empty?
-      flash.now[:danger] = i18n_message_for(:value_not_provided)
-      render :new
-    elsif user = User.find_by_email_or_username(sanitize_input)
+    if user = User.find_by_email_or_username(sanitize(params[:email_or_username]))
       user.create_reset_digest
       # user.send_password_reset_email
-      redirect_to login_path, success: i18n_message_for(:success, email: user.email)
+      redirect_to login_path, success: t_scoped(:success, email: user.email)
     else
-      flash.now[:danger] = i18n_message_for(:user_not_found, email: sanitize_input)
+      flash.now[:danger] = t_scoped(:user_not_found, email: params[:email_or_username])
       render :new
     end
   end
@@ -26,7 +24,10 @@ class PasswordResetsController < ApplicationController
 
 private
 
-  def sanitize_input
-    params[:email_or_username].strip.downcase if params[:email_or_username]
+  def validate_email_or_username
+    unless params[:email_or_username].present?
+      flash.now[:danger] = t_scoped(:value_not_provided)
+      render :new
+    end
   end
 end

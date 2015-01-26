@@ -43,7 +43,10 @@ group :development, :test do
   gem 'spring'
 end
 
+#
 # Anything above this line is included in Rails 4.2 by default
+# Inluce custom gems below this line
+#
 
 gem 'slim-rails'
 gem 'rails-i18n'
@@ -65,3 +68,5 @@ end
 group :test do
   gem 'shoulda'
 end
+
+gem 'i18n_lazy_scope'

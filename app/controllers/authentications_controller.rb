@@ -7,15 +7,15 @@ class AuthenticationsController < ApplicationController
 
     if logged_in?
       if authentication.user == current_user
-        redirect_to profile_path, info: i18n_message_for(:authentication_exists)
+        redirect_to profile_path, info: t_scoped(:authentication_exists)
       else
         current_user << authentication
-        redirect_to profile_path, success: i18n_message_for(:authentication_added)
+        redirect_to profile_path, success: t_scoped(:authentication_added)
       end
     else
       if authentication.user.present?
         log_in authentication.user
-        redirect_to profile_path, success: i18n_message_for(:welcome_back)
+        redirect_to profile_path, success: t_scoped(:welcome_back)
       else
         @user = User.initialize_from_omniauth(env["omniauth.auth"])
         render 'authentications/new'
@@ -30,13 +30,13 @@ class AuthenticationsController < ApplicationController
       log_in @user
       redirect_to profile_path
     else
-      flash.now[:danger] = i18n_message_for :failure
+      flash.now[:danger] = t_scoped(:failure)
       render :new
     end
   end
 
   def failure
-    redirect_to register_path, danger: "Ops! Não foi possível conectar no momento."
+    redirect_to register_path, danger: t_scoped(:failure)
   end
 
 private

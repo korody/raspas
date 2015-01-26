@@ -31,10 +31,14 @@ en:
       create:
         success: "An email with instructions was sent to %{email}."
         user_not_found: "We could not find %{email} in our system."
-        value_not_provided: "Please enter a username or an email address."
+        value_not_provided: "Please enter an email address or a username."
     sessions:
       create:
         failure: "The email or password you entered is incorrect."
+        success: "Welcome aboard!"
+        value_not_provided: "Please enter an email address or a username, and a password."
+      destroy:
+        success: "You have successfully logged out. See you soon."
     users:
       update:
         failure: "There was a problem with your form. Please check the form for errors."
@@ -44,3 +48,8 @@ en:
       user:
         create: "Register"
         update: "Update Profile"
+  mailers:
+    users_mailer:
+      welcome_email:
+        subject: "Welcome to Nimbus"
+  views:

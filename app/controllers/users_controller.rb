@@ -9,9 +9,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to profile_path, success: i18n_message_for(:success)
+      redirect_to profile_path, success: t_scoped(:success)
     else
-      flash.now[:danger] = i18n_message_for(:failure)
+      flash.now[:danger] = t_scoped(:failure)
       render :edit
     end
   end

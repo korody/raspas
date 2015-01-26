@@ -1,16 +1,19 @@
 class RegistrationsController < ApplicationController
   def new
     @user = User.new
+    # raise instance_variables.inspect
+    # raise instance_variable_get(:@_lookup_context).inspect
+    # raise @virtual_path.to_s
   end
 
   def create
-    @user = User.new(user_params)
+    @user = UserCreationService.create(user_params)
 
-    if @user.save
+    if @user.persisted?
       log_in @user
       redirect_to profile_path
     else
-      flash.now[:danger] = i18n_message_for :failure
+      flash.now[:danger] = t_scoped(:failure)
       render :new
     end
   end
