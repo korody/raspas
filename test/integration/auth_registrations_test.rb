@@ -100,4 +100,16 @@ class AuthRegistrationsTest < ActionDispatch::IntegrationTest
     assert_template 'auth_registrations/new'
     assert_equal auth_registrations_path, path
   end
+
+  test "user registers attempts registration with invalid auth_id" do
+    assert_raises ActiveRecord::RecordNotFound do
+      get new_auth_registration_path(auth_id: 1)
+    end
+  end
+
+  test "user registers attempts registration with invalid token" do
+    assert_raises BCrypt::Errors::InvalidHash do
+      get new_auth_registration_path(auth_id: Authentication.last.id, access_token: 'hello')
+    end
+  end
 end
