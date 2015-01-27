@@ -24,6 +24,10 @@ en:
       user:
         display_username: "Username"
   controllers:
+    authentications:
+      create:
+        auth_exists: "Authenticated successfully."
+        auth_added: "Successfully connected with %{provider}"
     registrations:
       create:
         failure: "There was a problem with your registration. Please check the form for any errors."

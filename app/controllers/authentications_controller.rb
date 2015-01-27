@@ -1,37 +1,23 @@
 class AuthenticationsController < ApplicationController
-  def new
-  end
 
   def create
-    authentication = Authentication.create_from_omniauth(env["omniauth.auth"])
+    auth = Authentication.from_omniauth(env["omniauth.auth"])
 
     if logged_in?
-      if authentication.user == current_user
-        redirect_to profile_path, info: t_scoped(:authentication_exists)
-      else
-        current_user << authentication
-        redirect_to profile_path, success: t_scoped(:authentication_added)
+      unless current_user.authentications.include?(auth)
+        current_user.add_auth(auth)
       end
+
+      redirect_to profile_path, success: t_scoped(:auth_added, provider: auth.provider.humanize)
     else
-      if authentication.user.present?
-        log_in authentication.user
-        redirect_to profile_path, success: t_scoped(:welcome_back)
+      if user = auth.user
+        login_user_and_redirect(user)
+      elsif user = User.find_by(email: auth['info']['email'])
+        user.add_auth(auth)
+        login_user_and_redirect(user)
       else
-        @user = User.initialize_from_omniauth(env["omniauth.auth"])
-        render 'authentications/new'
+        redirect_to new_auth_registration_path(auth_id: auth.id, access_token: auth.access_token)
       end
-    end
-  end
-
-  def complete_registration
-    @user = User.new(user_params)
-
-    if @user.save
-      log_in @user
-      redirect_to profile_path
-    else
-      flash.now[:danger] = t_scoped(:failure)
-      render :new
     end
   end
 
@@ -41,7 +27,8 @@ class AuthenticationsController < ApplicationController
 
 private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :display_username, :password)
+  def login_user_and_redirect(user)
+    log_in user
+    redirect_to profile_path, success: t_scoped(:welcome_back)
   end
 end

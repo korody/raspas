@@ -11,24 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122115106) do
+ActiveRecord::Schema.define(version: 20150115164232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
-    t.string   "info"
+    t.string   "provider",            null: false
+    t.string   "uid",                 null: false
     t.string   "token"
     t.string   "secret"
     t.boolean  "expires"
     t.datetime "expires_at"
-    t.string   "extra"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.json     "info"
+    t.json     "extra"
+    t.string   "access_token_digest"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid", unique: true, using: :btree
@@ -41,11 +41,13 @@ ActiveRecord::Schema.define(version: 20150122115106) do
     t.string   "display_username", null: false
     t.string   "image"
     t.string   "password_digest"
+    t.string   "remember_digest"
+    t.string   "string"
+    t.string   "reset_digest"
+    t.string   "reset_sent_at"
+    t.string   "datetime"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "remember_digest"
-    t.string   "reset_digest"
-    t.datetime "reset_sent_at"
   end
 
   add_index "users", ["display_username"], name: "index_users_on_display_username", unique: true, using: :btree

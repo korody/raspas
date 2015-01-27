@@ -3,6 +3,7 @@ module UsesSecurePassword
 
   included do
     include ActiveModel::SecurePassword
+    include Concerns::Digest
 
     RESET_EXPIRATION = 2
 
@@ -21,11 +22,6 @@ module UsesSecurePassword
 
   def forget
     update_attribute(:remember_digest, nil)
-  end
-
-  def authenticated?(attribute, token)
-    digest = send(attribute)
-    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def confirm
@@ -52,15 +48,6 @@ module UsesSecurePassword
   module ClassMethods
     def uses_secure_password(validate: true)
       has_secure_password validations: validate
-    end
-
-    def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost: cost)
-    end
-
-    def new_token
-      SecureRandom.urlsafe_base64
     end
 
     def find_by_email_or_username(value)

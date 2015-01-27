@@ -15,12 +15,16 @@ class User < ActiveRecord::Base
     display_username
   end
 
-  def self.initialize_from_omniauth(auth)
-    where(email: auth.info.email).first_or_initialize do |user|
-      user.name = auth.info.name
-      user.email = auth.info.email
-      user.display_username = auth.info.nickname unless auth.info.nickname.blank?
-      user.image = auth.info.image unless auth.info.image.blank?
+  def add_auth(auth)
+    authentications << auth
+  end
+
+  def self.initialize_from_auth(auth)
+    new do |user|
+      user.name = auth.info['name']
+      user.email = auth.info['email']
+      user.display_username = auth.info['nickname']
+      user.image = auth.info['image']
     end
   end
 

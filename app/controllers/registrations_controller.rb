@@ -1,9 +1,8 @@
 class RegistrationsController < ApplicationController
+  include UserParameters
+
   def new
     @user = User.new
-    # raise instance_variables.inspect
-    # raise instance_variable_get(:@_lookup_context).inspect
-    # raise @virtual_path.to_s
   end
 
   def create
@@ -16,11 +15,5 @@ class RegistrationsController < ApplicationController
       flash.now[:danger] = t_scoped(:failure)
       render :new
     end
-  end
-
-private
-
-  def user_params
-    params.require(:user).permit(:name, :email, :display_username, :password)
   end
 end

@@ -5,60 +5,113 @@ class OmniauthAuthenticationTest < ActionDispatch::IntegrationTest
     OmniAuth.config.test_mode = true
   end
 
-  def teardown
-    Authentication.delete_all
-  end
+  test "when logged in, authenticate with new provider" do
+    user = users(:homer)
+    auth = user.authentications.last.attributes.except(:id)
 
-  test "signup with valid information" do
-    auth_params = {
-      provider: 'google',
-      uid: '987654',
-      credentials: {
-        token: 'abc'
-      },
-      info: {
-        name: 'Ned Flanders',
-        email: 'ned@flanders.com',
-        nickname: 'nflanders',
-        image: 'path/to/image.jpg'
-      }
-    }
+    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(auth)
 
-    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(auth_params)
-
-    get login_path
-    assert_response :success
-
-    assert_difference 'Authentication.count' do
+    assert_no_difference 'Authentication.count' do
       get_via_redirect '/auth/google'
-    end
-
-    assert_template 'authentications/new'
-
-    user_params = {
-      name: 'Elvis Presley',
-      email: 'elvis@graceland.com',
-      display_username: 'elvisthepelvis',
-      password: 'rocking'
-    }
-
-    assert_difference 'User.count' do
-      post_via_redirect '/authenticate', user: user_params
     end
 
     assert_not_nil session[:user_id]
-    assert_equal User.last.id, session[:user_id]
-    assert_template 'users/show'
+    assert_equal user.id, session[:user_id]
+    assert_equal profile_path, path
+
+    auth_params = {
+      provider: 'twitter',
+      uid: '123456',
+      info: {
+        email: user.email,
+        nickname: user.username,
+      }
+    }
+
+    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(auth_params)
+
+    assert_difference 'Authentication.count' do
+      get_via_redirect '/auth/twitter'
+    end
+
+    assert_includes user.authentications, Authentication.last
+
+    assert_not_nil session[:user_id]
+    assert_equal user.id, session[:user_id]
     assert_equal profile_path, path
   end
 
-  test "signup with invalid information" do
+  test "when logged in, authenticate with same provider" do
+    user = users(:homer)
+    auth = user.authentications.last.attributes.except(:id)
+
+    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(auth)
+
+    assert_no_difference 'Authentication.count' do
+      get_via_redirect '/auth/google'
+    end
+
+    assert_not_nil session[:user_id]
+    assert_equal user.id, session[:user_id]
+    assert_equal profile_path, path
+
+    assert_no_difference 'Authentication.count' do
+      get_via_redirect '/auth/google'
+    end
+
+    assert_not_nil session[:user_id]
+    assert_equal user.id, session[:user_id]
+    assert_equal profile_path, path
+  end
+
+  test "when not logged in, authenticate with existing provider" do
+    user = users(:homer)
+    auth = user.authentications.last.attributes.except(:id)
+
+    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(auth)
+
+    get login_path
+    assert_nil session[:user_id]
+
+    assert_no_difference 'Authentication.count' do
+      get_via_redirect '/auth/google'
+    end
+
+    assert_not_nil session[:user_id]
+    assert_equal user.id, session[:user_id]
+    assert_equal profile_path, path
+  end
+
+  test "when not logged in, authenticate with new provider" do
+    user = users(:homer)
+
+    auth_params = {
+      provider: 'twitter',
+      uid: '123456',
+      info: {
+        email: user.email,
+        nickname: user.username,
+      }
+    }
+
+    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(auth_params)
+
+    get login_path
+    assert_nil session[:user_id]
+
+    assert_difference 'Authentication.count' do
+      get_via_redirect '/auth/twitter'
+    end
+
+    assert_not_nil session[:user_id]
+    assert_equal user.id, session[:user_id]
+    assert_equal profile_path, path
+  end
+
+  test "when not logged in, authenticate with new provider and no prior accounts" do
     auth_params = {
       provider: 'google',
       uid: '987654',
-      credentials: {
-        token: 'abc'
-      },
       info: {
         name: 'Ned Flanders',
         email: 'ned@flanders.com',
@@ -76,38 +129,24 @@ class OmniauthAuthenticationTest < ActionDispatch::IntegrationTest
       get_via_redirect '/auth/google'
     end
 
-    assert_template 'authentications/new'
+    assert_not_nil @request.params[:access_token]
+    assert_not_nil @request.params[:auth_id]
 
-    assert_no_difference 'User.count' do
-      post_via_redirect '/authenticate', user: { name: 'Elvis Presley', email: 'elvis@graceland.com' }
-    end
-
-    assert_equal '/authenticate', path
-    assert_nil session[:user_id]
-    assert_template 'authentications/new'
-    assert_equal authenticate_path, path
+    assert_template 'auth_registrations/new'
+    assert_equal new_auth_registration_path, path
   end
 
-  test "signup when nickname and image are not available" do
-    auth_params = {
-      provider: 'google',
-      uid: '987654',
-      credentials: {
-        token: 'abc'
-      },
-      info: {
-        name: 'Ned Flanders',
-        email: 'ned@flanders.com',
-      }
-    }
-
-    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(auth_params)
+  test "simulate failure" do
+    OmniAuth.config.mock_auth[:google] = :invalid_credentials
 
     get login_path
     assert_response :success
 
-    assert_difference 'Authentication.count' do
+    assert_no_difference 'Authentication.count' do
       get_via_redirect '/auth/google'
     end
+
+    assert_equal register_path, path
+    assert_nil session[:user_id]
   end
 end

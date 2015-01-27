@@ -21,4 +21,8 @@ class ActiveSupport::TestCase
 
     user
   end
+
+  def assert_respond_to_attr(model, attribute)
+    assert_respond_to model, attribute, "#{attribute.upcase} is not a field"
+  end
 end

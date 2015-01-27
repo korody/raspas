@@ -4,11 +4,17 @@ one:
   provider: google
   uid: 123456
   info:
-  token:
-  secret:
-  expires:
-  expires_at:
+    name: 'Homer Simpson'
+    email: 'homer@simpson.com'
+    nickname: 'homer'
+    image: 'path/to/image.jpg'
+  token: 'abc'
+  secret: '123'
+  expires: true
+  expires_at: <%= Time.at(1354920555) %>
   extra:
+    raw_info:
+      hello: "Yay!"
   user: homer
 
 two:

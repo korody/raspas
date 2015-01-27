@@ -8,6 +8,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :image
       t.string :password_digest
 
+      t.string :remember_digest, :string
+
+      t.string :reset_digest, :string
+      t.string :reset_sent_at, :datetime
+
       t.timestamps null: false
     end
     add_index :users, :email, unique: true

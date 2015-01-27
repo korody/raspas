@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resource :profile, only: [:show, :edit, :update], controller: :users
 
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :auth_registrations, only: [:new, :create]
 
-  get '/auth/:provider/callback', to: 'authentications#create'
   get '/auth/failure', to: 'authentications#failure'
+  get '/auth/:provider/callback', to: 'authentications#create'
 
   post :register, to: 'registrations#create'
   get :register, to: 'registrations#new'
 
-  post :authenticate, to: 'authentications#complete_registration'
-  get :authenticate, to: 'authentications#new'
-  
   delete :logout, to: 'sessions#destroy'
   post :login, to: 'sessions#create'
   get :login, to: 'sessions#new'

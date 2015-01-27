@@ -9,6 +9,11 @@ class UserTest < ActiveSupport::TestCase
   should have_db_column(:image).of_type(:string)
   should have_db_column(:password_digest).of_type(:string)
 
+  should have_db_column(:remember_digest).of_type(:string)
+
+  should have_db_column(:reset_digest).of_type(:string)
+  should have_db_column(:reset_sent_at).of_type(:string)
+
   should have_db_index(:email).unique(true)
   should have_db_index(:username).unique(true)
   should have_db_index(:display_username).unique(true)
@@ -45,5 +50,17 @@ class UserTest < ActiveSupport::TestCase
     homer.email = 'HOMER@SIMPSON.COM'
     homer.save
     assert_equal 'homer@simpson.com', homer.reload.email
+  end
+
+  test "#add_auth" do
+    skip
+  end
+
+  test "#to_param" do
+    skip
+  end
+
+  test ".initialize_from_auth" do
+    skip
   end
 end

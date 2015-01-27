@@ -3,7 +3,9 @@ section class="centered-page"
     h1 Olá #{@user.name}!
     p class="lead" Por favor, confirme suas informações abaixo:
   div class="form-wrapper"
-    = form_for @user, url: authenticate_path do |f|
+    = form_for @user, url: auth_registrations_path do |f|
+      = hidden_field_tag :auth_id, params[:auth_id]
+      = hidden_field_tag :token, params[:token]
       = f.text_field :name, class: 'form-control'
       = f.text_field :email, class: 'form-control'
       = f.text_field :display_username, class: 'form-control'
