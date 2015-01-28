@@ -1,15 +1,15 @@
 section class="centered-page"
   header class="text-center"
     h1 Olá #{@user.name}!
-    p class="lead" Por favor, confirme suas informações abaixo:
+    p class="lead" Por favor, confirme suas informações abaixo.
   div class="form-wrapper"
     = form_for @user, url: auth_registrations_path do |f|
       = hidden_field_tag :auth_id, params[:auth_id]
-      = hidden_field_tag :token, params[:token]
+      = hidden_field_tag :access_token, params[:access_token]
       = f.text_field :name, class: 'form-control'
       = f.text_field :email, class: 'form-control'
       = f.text_field :display_username, class: 'form-control'
       p class="help-block" Adicione um nome de usuário para seu id único do Nimbus.
       = f.password_field :password, class: 'form-control'
       p class="help-block" Adicione uma senha para proteger sua conta.
-      = f.submit "Estou pronto", class: 'btn btn-success btn-lg btn-block'
+      = f.submit t_scoped(:submit_button), class: 'btn btn-success btn-lg btn-block'

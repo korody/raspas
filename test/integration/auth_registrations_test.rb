@@ -101,15 +101,31 @@ class AuthRegistrationsTest < ActionDispatch::IntegrationTest
     assert_equal auth_registrations_path, path
   end
 
-  test "user registers attempts registration with invalid auth_id" do
+  test "user attempts registration with invalid auth_id" do
     assert_raises ActiveRecord::RecordNotFound do
-      get new_auth_registration_path(auth_id: 1)
+      get new_auth_registration_path(auth_id: 1, access_token: '1234')
     end
   end
 
-  test "user registers attempts registration with invalid token" do
+  test "user attempts registration with invalid token" do
     assert_raises BCrypt::Errors::InvalidHash do
       get new_auth_registration_path(auth_id: Authentication.last.id, access_token: 'hello')
     end
+  end
+
+  test "user attempts registration without auth_id" do
+    get new_auth_registration_path(access_token: '1')
+    assert_response :redirect
+    assert_redirected_to login_path
+    follow_redirect!
+    assert_equal login_path, path
+  end
+
+  test "user attempts registration without token" do
+    get new_auth_registration_path(auth_id: '1')
+    assert_response :redirect
+    assert_redirected_to login_path
+    follow_redirect!
+    assert_equal login_path, path
   end
 end

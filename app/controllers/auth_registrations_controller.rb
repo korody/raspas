@@ -23,9 +23,14 @@ class AuthRegistrationsController < ApplicationController
 private
 
   def validate_authentication
-    @auth = Authentication.find(params[:auth_id])
-    unless @auth.authenticated?(:access_token_digest, params[:access_token])
-      redirect_to login_path, danger: t_scoped(:not_authorized)
+    if params[:auth_id].blank? || params[:access_token].blank?
+      redirect_to login_path
+    else
+      @auth = Authentication.find(params[:auth_id])
+
+      unless @auth.authenticated?(:access_token_digest, params[:access_token])
+        redirect_to login_path, danger: t_scoped(:not_authorized)
+      end
     end
   end
 end

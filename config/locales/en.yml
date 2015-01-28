@@ -57,3 +57,6 @@ en:
       welcome_email:
         subject: "Welcome to Nimbus"
   views:
+    auth_registrations:
+      new:
+        submit_button: "Continue"
