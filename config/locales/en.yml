@@ -25,8 +25,12 @@ en:
         display_username: "Username"
   controllers:
     auth_registrations:
-      failure: "There was a problem with your registration. Please check the form for errors."
-      success: "Welcome aboard!"
+      new:
+        not_authorized: "Not authorized."
+      create:
+        failure: "There was a problem with your registration. Please check the form for errors."
+        success: "Welcome aboard!"
+        not_authorized: "Not authorized."
     authentications:
       create:
         auth_exists: "Authenticated successfully."
