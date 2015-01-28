@@ -13,7 +13,7 @@ class AuthRegistrationsController < ApplicationController
 
     if @user.save
       log_in @user
-      redirect_to profile_path, success: t_scoped(:welcome)
+      redirect_to profile_path, success: t_scoped(:success)
     else
       flash.now[:danger] = t_scoped(:failure)
       render :new

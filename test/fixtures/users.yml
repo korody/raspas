@@ -14,4 +14,4 @@ bart:
   username: bart
   display_username: bArT
   image: /path/to/photo
-  password_digest: <%= BCrypt::Password.create('donuts', cost: 4) %>
+  password_digest: <%= BCrypt::Password.create('mwahahaha', cost: 4) %>

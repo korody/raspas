@@ -24,6 +24,9 @@ en:
       user:
         display_username: "Username"
   controllers:
+    auth_registrations:
+      failure: "There was a problem with your registration. Please check the form for errors."
+      success: "Welcome aboard!"
     authentications:
       create:
         auth_exists: "Authenticated successfully."
@@ -34,8 +37,18 @@ en:
     password_resets:
       create:
         success: "An email with instructions was sent to %{email}."
-        user_not_found: "We could not find %{email} in our system."
+        user_not_found: "We could not find the email address or username <b>%{email}</b> in our system."
         value_not_provided: "Please enter an email address or a username."
+      edit:
+        not_authorized: "Not authorized."
+        reset_expired: "Your password reset request has expired. Please request a new one."
+        user_not_found: "User not found."
+      update:
+        failure: "We could not update your password. Please check the form for errors."
+        not_authorized: "Not authorized."
+        reset_expired: "Your password reset request has expired. Please request a new one."
+        success: "Password updated successfully."
+        user_not_found: "User not found."
     sessions:
       create:
         failure: "The email or password you entered is incorrect."

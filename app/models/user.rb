@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 60 }
   validates :display_username, presence: true, length: { minimum: 2, maximum: 15 }, uniqueness: { case_sensitive: false }, username_format: true
   validates :email, presence: true, length: { maximum: 60 }, uniqueness: { case_sensitive: false }, email_format: true
+  validates :password, presence: true, length: { minimum: 6 }, if: :validate_password?
 
   has_many :authentications
 
@@ -36,5 +37,9 @@ private
 
   def downcase_email
     email.downcase!
+  end
+
+  def validate_password?
+    (new_record? || password_digest_changed?)
   end
 end

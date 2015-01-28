@@ -9,11 +9,10 @@ class PasswordResetsController < ApplicationController
   def create
     if @user = User.find_by_email_or_username(sanitize(params[:email_or_username]))
       @user.create_reset_digest
-      # puts @user.reset_token
       # user.send_password_reset_email
       redirect_to login_path, success: t_scoped(:success, email: @user.email)
     else
-      flash.now[:danger] = t_scoped(:user_not_found, email: params[:email_or_username])
+      flash.now[:danger] = t_scoped(:user_not_found, email: params[:email_or_username]).html_safe
       render :new
     end
   end
@@ -33,7 +32,7 @@ class PasswordResetsController < ApplicationController
 private
 
   def validate_email_or_username
-    unless params[:email_or_username].present?
+    if params[:email_or_username].blank?
       flash.now[:danger] = t_scoped(:value_not_provided)
       render :new
     end
@@ -42,12 +41,16 @@ private
   def get_user_or_redirect
     if @user = User.find_by_email_or_username(sanitize(params[:email_or_username]))
       if @user.reset_expired?
-        redirect_to new_password_reset_path, danger: t_scoped(:reset_expired)
+        redirect_user :reset_expired
       elsif !@user.authenticated?(:reset_digest, params[:id])
-        redirect_to new_password_reset_path, danger: t_scoped(:not_authorized)
+        redirect_user :not_authorized
       end
     else
-      redirect_to new_password_reset_path, danger: t_scoped(:user_not_found)
+      redirect_user :user_not_found
     end
+  end
+
+  def redirect_user(message)
+    redirect_to new_password_reset_path, danger: t_scoped(message)
   end
 end
