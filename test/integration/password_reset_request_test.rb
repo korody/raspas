@@ -14,10 +14,6 @@ class PasswordResetRequestTest < ActionDispatch::IntegrationTest
     assert_nil @user.reset_sent_at
   end
 
-  def teardown
-    @user = nil
-  end
-
   test "requesting a password reset while signed in should redirect to profile page" do
     user = login(:homer)
     get new_password_reset_path
@@ -79,5 +75,8 @@ private
 
     assert_not_nil @user.reset_digest
     assert_not_nil @user.reset_sent_at
+
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_equal [@user.email], ActionMailer::Base.deliveries.last.to
   end
 end

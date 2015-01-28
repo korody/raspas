@@ -70,9 +70,11 @@ en:
         create: "Register"
         update: "Update Profile"
   mailers:
-    users_mailer:
+    user_mailer:
+      password_reset_request:
+        subject: "Password change request"
       welcome_email:
-        subject: "Welcome to Nimbus"
+        subject: "Welcome"
   views:
     auth_registrations:
       new:

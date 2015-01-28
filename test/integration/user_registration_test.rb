@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class UserRegistrationTest < ActionDispatch::IntegrationTest
-  def setup
-    ActionMailer::Base.deliveries = []
-  end
-
   test "user should not register with bad information" do
     go_to '/register', template: 'registrations/new'
 

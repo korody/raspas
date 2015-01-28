@@ -4,6 +4,10 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: t_scoped(:subject)
   end
 
-  def password_reset(user_id)
+  def password_reset_request(user)
+    @name = user.name
+    @email = user.email
+    @token = user.reset_token
+    mail to: @email, subject: t_scoped(:subject)
   end
 end

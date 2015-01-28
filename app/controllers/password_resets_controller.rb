@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
   def create
     if @user = User.find_by_email_or_username(sanitize(params[:email_or_username]))
       @user.create_reset_digest
-      # user.send_password_reset_email
+      UserMailer.password_reset_request(@user).deliver_now
       redirect_to login_path, success: t_scoped(:success, email: @user.email)
     else
       flash.now[:danger] = t_scoped(:user_not_found, email: params[:email_or_username]).html_safe

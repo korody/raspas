@@ -6,6 +6,14 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  def setup
+    ActionMailer::Base.deliveries.clear
+  end
+
+  def teardown
+    ActionMailer::Base.deliveries.clear
+  end
+
   def go_to(path, template: false)
     get path
     assert_response :success
