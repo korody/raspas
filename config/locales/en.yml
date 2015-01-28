@@ -78,4 +78,21 @@ en:
   views:
     auth_registrations:
       new:
-        submit_button: "Continue"
+        submit_button: "Finish Registration"
+        title: "Finish Registration"
+    password_resets:
+      edit:
+        title: "Reset Password"
+      new:
+        title: "Request Password Reset"
+    sessions:
+      new:
+        title: "Login"
+    registrations:
+      new:
+        title: "Sign Up"
+    users:
+      edit:
+        title: "Edit Profile"
+      show:
+        title: "Profile - %{user_name}"

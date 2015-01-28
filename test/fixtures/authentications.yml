@@ -27,3 +27,13 @@ two:
   expires_at:
   extra:
   user: homer
+
+without_user:
+  provider: facebook
+  uid: 987654
+  info:
+  token:
+  secret:
+  expires:
+  expires_at:
+  extra:

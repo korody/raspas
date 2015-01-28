@@ -53,14 +53,27 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "#add_auth" do
-    skip
+    user = users(:homer)
+    auth = authentications(:without_user)
+    user.add_auth(auth)
+    assert_equal user, auth.user
+    assert_includes user.authentications, auth
   end
 
-  test "#to_param" do
-    skip
+  test "#to_param returns display_username" do
+    user = users(:homer)
+    assert_equal user.display_username, user.to_param
   end
 
   test ".initialize_from_auth" do
-    skip
+    auth = OpenStruct.new
+    auth.info = { 'name' => 'Bart Simpson', 'email' => 'bart@simpson.com', 'nickname' => 'bArT', 'image' => 'path/to/image.jpg' }
+
+    user = User.initialize_from_auth(auth)
+
+    assert_equal 'Bart Simpson', user.name
+    assert_equal 'bart@simpson.com', user.email
+    assert_equal 'bArT', user.display_username
+    assert_equal 'path/to/image.jpg', user.image
   end
 end

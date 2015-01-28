@@ -45,6 +45,10 @@ module UsesSecurePassword
     password_digest.present?
   end
 
+  def validate_password?
+    new_record? || password_digest_changed? || (reset_sent_at? && !reset_expired?)
+  end
+
   module ClassMethods
     def uses_secure_password(validate: true)
       has_secure_password validations: validate

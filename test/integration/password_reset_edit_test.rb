@@ -20,17 +20,25 @@ class PasswordResetEditTest < ActionDispatch::IntegrationTest
   end
 
   def teardown
-    @user = nil
+    ActionMailer::Base.deliveries.clear
   end
 
   test "edit password with valid email and token" do
-    get edit_password_reset_path(@user.reset_token), email_or_username: @user.email
+    get edit_password_reset_path(@user.reset_token), email: @user.email
+
     assert_response :success
     assert_template 'password_resets/edit'
     assert_equal edit_password_reset_path(@user.reset_token), path
 
+    # Update password with bad one
+    params = { email: @user.email, user: { password: 'short' } }
+    patch_via_redirect password_reset_path, params
+
+    assert_equal password_reset_path, path
+    assert_not_empty flash[:danger]
+
     # Update password
-    params = { email_or_username: @user.email, user: { password: 'new password' } }
+    params = { email: @user.email, user: { password: 'new password' } }
     patch_via_redirect password_reset_path, params
 
     # User should be updated and redirected to login path
@@ -51,34 +59,34 @@ class PasswordResetEditTest < ActionDispatch::IntegrationTest
   end
 
   test "edit password with invalid email" do
-    get edit_password_reset_path(@user.reset_token), email_or_username: 'wrong email'
+    get edit_password_reset_path(@user.reset_token), email: 'wrong email'
     assert_redirected_to_new_password_reset_path
   end
 
   test "edit password with invalid token" do
-    get edit_password_reset_path('abcdef'), email_or_username: @user.email
+    get edit_password_reset_path('abcdef'), email: @user.email
     assert_redirected_to_new_password_reset_path
   end
 
   test "edit password with expired token" do
     @user.update(reset_sent_at: 3.hours.ago)
-    get edit_password_reset_path(@user.reset_token), email_or_username: @user.email
+    get edit_password_reset_path(@user.reset_token), email: @user.email
     assert_redirected_to_new_password_reset_path
   end
 
   test "patch request with invalid email" do
-    patch password_reset_path(@user.reset_token), email_or_username: 'wrong email'
+    patch password_reset_path(@user.reset_token), email: 'wrong email'
     assert_redirected_to_new_password_reset_path
   end
 
   test "patch request with invalid token" do
-    patch password_reset_path('abcde'), email_or_username: @user.email
+    patch password_reset_path('abcde'), email: @user.email
     assert_redirected_to_new_password_reset_path
   end
 
   test "patch request with expired token" do
     @user.update(reset_sent_at: 3.hours.ago)
-    patch password_reset_path(@user.reset_token), email_or_username: @user.email
+    patch password_reset_path(@user.reset_token), email: @user.email
     assert_redirected_to_new_password_reset_path
   end
 

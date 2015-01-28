@@ -39,7 +39,7 @@ private
   end
 
   def get_user_or_redirect
-    if @user = User.find_by_email_or_username(sanitize(params[:email_or_username]))
+    if @user = User.find_by_email_or_username(sanitize(params[:email]))
       if @user.reset_expired?
         redirect_user :reset_expired
       elsif !@user.authenticated?(:reset_digest, params[:id])

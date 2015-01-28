@@ -38,8 +38,4 @@ private
   def downcase_email
     email.downcase!
   end
-
-  def validate_password?
-    (new_record? || password_digest_changed?)
-  end
 end
