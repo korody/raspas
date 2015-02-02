@@ -4,4 +4,8 @@ class EmailAddress
   def self.malformed?(email)
     email !~ VALID_EMAIL_ADDRESS_REGEX
   end
+
+  def self.valid?(email)
+    !malformed?(email)
+  end
 end

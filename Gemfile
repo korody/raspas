@@ -69,6 +69,7 @@ group :test do
   gem 'shoulda'
 end
 
+gem 'i18n'
 gem 'i18n_lazy_scope'
 
 gem 'rack-mini-profiler'

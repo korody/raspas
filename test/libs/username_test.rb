@@ -20,7 +20,7 @@ class UsernameTest < ActiveSupport::TestCase
     assert Username.valid?("milhouse")
   end
 
-  test "valid? returns false for valid username" do
+  test "valid? returns false for invalid username" do
     refute Username.valid?("-milhouse")
   end
 end

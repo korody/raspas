@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get :validate, to: 'validations#validate', defaults: { format: :json }
+
   resources :password_resets, only: [:new, :create, :edit, :update]
   resource :profile, only: [:show, :edit, :update], controller: :users
 

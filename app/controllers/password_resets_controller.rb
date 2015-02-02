@@ -1,3 +1,5 @@
+using StringExtensions
+
 class PasswordResetsController < ApplicationController
   before_action :ensure_logged_out
   before_action :validate_email_or_username, only: :create
@@ -7,7 +9,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    if @user = User.find_by_email_or_username(sanitize(params[:email_or_username]))
+    if @user = User.find_by_email_or_username(params[:email_or_username].sanitize)
       @user.create_reset_digest
       UserMailer.password_reset_request(@user).deliver_now
       redirect_to login_path, success: t_scoped(:success, email: @user.email)
@@ -39,7 +41,7 @@ private
   end
 
   def get_user_or_redirect
-    if @user = User.find_by_email_or_username(sanitize(params[:email]))
+    if @user = User.find_by_email_or_username(params[:email].sanitize)
       if @user.reset_expired?
         redirect_user :reset_expired
       elsif !@user.authenticated?(:reset_digest, params[:id])

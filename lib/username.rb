@@ -4,4 +4,8 @@ class Username
   def self.valid?(username)
     username =~ VALID_USERNAME_REGEX
   end
+
+  def self.malformed?(username)
+    !valid?(username)
+  end
 end

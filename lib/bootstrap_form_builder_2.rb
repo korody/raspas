@@ -3,12 +3,14 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   %w[text_field password_field].each do |method_name|
     define_method(method_name) do |name, *args|
-      options = args.extract_options!
-      if options[:hide_label]
-        options.reverse_merge!(placeholder: object.class.human_attribute_name(name))
-        super(name, options) + errors_for(name)
-      else
-        field_label(name, options) + super(name, options) + errors_for(name)
+      content_tag :div, class: 'form-group' do
+        options = args.extract_options!
+        if options[:hide_label]
+          options.reverse_merge!(placeholder: object.class.human_attribute_name(name))
+          super(name, options) + errors_for(name)
+        else
+          field_label(name, options) + super(name, options) + errors_for(name)
+        end
       end
     end
   end
@@ -20,7 +22,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 private
 
   def field_label(name, options)
-    label name, options[:label], class: 'control-label'
+    label(name, options[:label], class: ('required-field' if required_field?(name)))
   end
 
   def errors_for(name)

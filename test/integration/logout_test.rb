@@ -5,7 +5,6 @@ class LogoutTest < ActionDispatch::IntegrationTest
     login(:homer)
     delete '/logout'
 
-    assert_response :redirect
     assert_redirected_to login_path
 
     follow_redirect!
