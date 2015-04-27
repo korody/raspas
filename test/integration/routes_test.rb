@@ -3,6 +3,7 @@ require 'test_helper'
 class RoutesTest < ActionController::TestCase
   # JSON check is failing here. Shoulda converts it into a string, but the route defines json as a symbol
   # And this way we get an equality mismatch and a failing test.
+  # This is now fixed, see https://github.com/thoughtbot/shoulda-matchers/issues/685
   should route(:get, '/validate').to(controller: :validations, action: :validate, format: :json)
 
   should route(:patch, '/password_resets/123').to(controller: :password_resets, action: :update, id: 123)

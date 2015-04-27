@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 20150115164232) do
     t.string   "uid",                 null: false
     t.string   "token"
     t.string   "secret"
+    t.string   "access_token_digest"
     t.boolean  "expires"
     t.datetime "expires_at"
     t.json     "info"
     t.json     "extra"
-    t.string   "access_token_digest"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150115164232) do
     t.string   "email",            null: false
     t.string   "username",         null: false
     t.string   "display_username", null: false
-    t.string   "image"
+    t.string   "photo"
     t.string   "password_digest"
     t.string   "remember_digest"
     t.string   "string"
@@ -54,4 +54,5 @@ ActiveRecord::Schema.define(version: 20150115164232) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "authentications", "users"
 end

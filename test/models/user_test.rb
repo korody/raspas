@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
   should have_db_column(:email).of_type(:string).with_options(null: false)
   should have_db_column(:username).of_type(:string).with_options(null: false)
   should have_db_column(:display_username).of_type(:string).with_options(null: false)
-  should have_db_column(:image).of_type(:string)
+  should have_db_column(:photo).of_type(:string)
   should have_db_column(:password_digest).of_type(:string)
 
   should have_db_column(:remember_digest).of_type(:string)
@@ -74,6 +74,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 'Bart Simpson', user.name
     assert_equal 'bart@simpson.com', user.email
     assert_equal 'bArT', user.display_username
-    assert_equal 'path/to/image.jpg', user.image
+    assert_equal 'path/to/image.jpg', user.photo
   end
 end

@@ -1,15 +1,12 @@
 doctype html
 html
-head
-  title
-  	= page_title yield(:title)
-  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-  = javascript_include_tag 'application', 'data-turbolinks-track' => true
-  = csrf_meta_tags
-head
-body
-  = render 'flash'
-  main
-    = yield
-body
-html
+  head
+    title
+    	= page_title yield(:title)
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    = render 'flash'
+    main
+      = yield

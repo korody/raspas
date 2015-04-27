@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
       user.name = auth.info['name']
       user.email = auth.info['email']
       user.display_username = auth.info['nickname']
-      user.image = auth.info['image']
+      user.photo = auth.info['image']
     end
   end
 

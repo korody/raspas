@@ -5,7 +5,7 @@ homer:
   email: homer@simpson.com
   username: homer
   display_username: homer
-  image: /path/to/photo
+  photo: /path/to/photo
   password_digest: <%= BCrypt::Password.create('donuts', cost: 4) %>
 
 bart:
@@ -13,5 +13,5 @@ bart:
   email: bart@simpson.com
   username: bart
   display_username: bArT
-  image: /path/to/photo
+  photo: /path/to/photo
   password_digest: <%= BCrypt::Password.create('mwahahaha', cost: 4) %>

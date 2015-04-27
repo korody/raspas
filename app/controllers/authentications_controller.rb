@@ -4,10 +4,7 @@ class AuthenticationsController < ApplicationController
     auth = Authentication.from_omniauth(env["omniauth.auth"])
 
     if logged_in?
-      unless current_user.authentications.include?(auth)
-        current_user.add_auth(auth)
-      end
-
+      current_user.add_auth(auth) unless current_user.authentications.include?(auth)
       redirect_to profile_path, success: t_scoped(:auth_added, provider: auth.provider.humanize)
     else
       if user = auth.user
