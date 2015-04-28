@@ -3,8 +3,10 @@ class AuthRegistrationsController < ApplicationController
 
   before_action :validate_authentication
 
+  layout 'sessions'
+
   def new
-    @user = User.initialize_from_auth(@auth)    
+    @user = User.initialize_from_auth(@auth)
   end
 
   def create

@@ -1,10 +1,6 @@
 = provide :title, t_scoped(:title)
 
-section class="centered-page"
-  header class="text-center"
-    h1 Nimbus
-    p class="lead" Edit Your Profile
-
-  div class="form-wrapper"
-    = form_for @user, url: profile_path do |f|
-      = render 'registrations/user_fields', f: f
+div class="col l6 s12 offset-l3"
+  h5 class="center-align" Edit Your Profile
+  = form_for @user, url: profile_path do |f|
+    = render 'registrations/user_fields', f: f

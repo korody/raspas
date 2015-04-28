@@ -1,6 +1,8 @@
 class RegistrationsController < ApplicationController
   include UserParameters
 
+  layout 'sessions'
+
   def new
     @user = User.new
   end

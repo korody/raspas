@@ -1,17 +1,26 @@
 = provide :title, t_scoped(:title)
 
-section class="centered-page"
-  header class="text-center"
-    h1 Olá #{@user.name}!
-    p class="lead" Por favor, confirme suas informações abaixo.
-  div class="form-wrapper"
-    = form_for @user, url: auth_registrations_path do |f|
-      = hidden_field_tag :auth_id, params[:auth_id]
-      = hidden_field_tag :access_token, params[:access_token]
-      = f.text_field :name, class: 'form-control'
-      = f.text_field :email, class: 'form-control'
-      = f.text_field :display_username, class: 'form-control'
+div class="col l6 s12 offset-l3"
+  div class="center-align"
+    h5 Olá #{@user.name}!
+    p Por favor, confirme suas informações abaixo.
+  = form_for @user, url: auth_registrations_path do |f|
+    = hidden_field_tag :auth_id, params[:auth_id]
+    = hidden_field_tag :access_token, params[:access_token]
+    = f.hidden_field :photo
+    div class="input-field col s12"
+      i class="mdi-action-face-unlock prefix"
+      = f.text_field :name
+    div class="input-field col s12"
+      i class="mdi-communication-email prefix"
+      = f.text_field :email
+    div class="input-field col s12"
+      i class="mdi-social-person prefix"
+      = f.text_field :display_username
       p class="help-block" Adicione um nome de usuário para seu id único do Nimbus.
-      = f.password_field :password, class: 'form-control'
+    div class="input-field col s12"
+      i class="mdi-action-lock-outline prefix"
+      = f.password_field :password
       p class="help-block" Adicione uma senha para proteger sua conta.
-      = f.submit t_scoped(:submit_button), class: 'btn btn-success btn-lg btn-block'
+    div class="input-field col s12"
+      = f.submit class: 'btn indigo'

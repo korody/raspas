@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title = page_title yield(:title)
+    = render 'assets'
+  body
+    = render 'sessions/header'
+    = render 'flash'
+    main
+      div class="container section"
+        div class="row"
+          = yield

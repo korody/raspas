@@ -1,14 +1,17 @@
 = provide :title, t_scoped(:title, user_name: @user.name)
 
-section class="centered-page"
-  div class="user-card"
-    header class="user-card__header"
-      figure class="user-card__image"
-        = image_tag 'http://www.gravatar.com/avatar/d5b87af3621bd16385a386558b32644e.png', class: 'img-circle'
-      div class="user-card__info-wrapper"
-        h1 class="user-card__name" = @user.name
-        p class="user-card__info" #{@user.email} / @#{@user.username}
 
-  div class="text-center"
-    p = link_to "Edit Profile", edit_profile_path, class: 'btn btn-primary'
-    p = link_to "Logout", logout_path, method: :delete, class: 'btn btn-danger'
+div class="col l4 s12"
+  div class="card"
+    div class="card-image"
+      = image_tag @user.photo
+      h5 class="card-title" = @user.name
+    div class="card-content"
+      dl.unstyled
+        dt Email
+        dd = @user.email
+        dt Username
+        dd = @user.username
+    div class="card-action"
+      = link_to "Edit Profile", edit_profile_path
+      = link_to "Logout", logout_path, method: :delete

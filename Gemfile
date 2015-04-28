@@ -67,3 +67,5 @@ end
 
 gem 'i18n_lazy_scope'
 gem 'rack-mini-profiler'
+
+gem 'materialize-sass'

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :ensure_logged_in, :set_user
 
+  layout 'sessions'
+
   def show
   end
 

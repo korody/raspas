@@ -1,19 +1,8 @@
 = provide :title, t_scoped(:title)
 
-section class="centered-page"
-  header class="text-center"
-    h1 Nimbus
-    p class="lead" Sign up to Nimbus
+= render 'social_login'
 
-  div class="form-wrapper"
-    div class="social-signup__link"
-      = link_to "Sign up with Google", '/auth/google', class: 'btn btn-danger btn-block btn-lg'
-    div class="social-signup__link"
-      = link_to "Sign up with Facebook", '/auth/facebook', class: 'btn btn-primary btn-block btn-lg'
-    p class="lead text-center" or
-
-    h3 class="text-center" Sign up with Email
-    = form_for @user, url: register_path do |f|
-      = render 'registrations/user_fields', f: f
-
-  p class="text-center" Already have an account? #{link_to "Log in", login_path}.
+div class="col l6 s12 offset-l3"
+  h5 class="center-align" Register with Email
+  = form_for @user, url: register_path do |f|
+    = render 'registrations/user_fields', f: f

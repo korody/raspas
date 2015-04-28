@@ -1,9 +1,14 @@
-div	class="form-group"
-  = f.text_field :name, class: 'form-control'
-div class="form-group has-feedback"
-  = f.text_field :email, class: 'form-control', data: { 'remote-validate' => 'email' }
-div class="form-group has-feedback"
-  = f.text_field :display_username, class: 'form-control', data: { validate: 'username' }
-div class="form-group has-feedback"
-  = f.password_field :password, class: 'form-control'
-= f.submit class: 'btn btn-success btn-lg btn-block'
+div	class="input-field col s12"
+  i class="mdi-action-face-unlock prefix"
+  = f.text_field :name
+div class="input-field col s12"
+  i class="mdi-communication-email prefix"
+  = f.text_field :email
+div class="input-field col s12"
+  i class="mdi-social-person prefix"
+  = f.text_field :display_username
+div class="input-field col s12"
+  i class="mdi-action-lock-outline prefix"
+  = f.password_field :password
+div class="input-field col s12"
+  = f.submit class: 'btn indigo'

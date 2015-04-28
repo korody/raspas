@@ -28,5 +28,8 @@ module Identity
 
     # Force SSL by defailt
     config.force_ssl = false
+
+    # Removes the field_with_errors wrapper div
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

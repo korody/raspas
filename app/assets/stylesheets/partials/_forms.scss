@@ -1,0 +1,17 @@
+// Input fields are indented to accomodate icons.
+// We should indent help blocks and error messages by the same disctance.
+$input-left-margin: 3rem;
+
+.field-error {
+  @extend .red-text;
+
+  margin-left: $input-left-margin;
+  margin-top: 0;
+}
+
+.help-block {
+  @extend .grey-text, .text-darken-2;
+
+  margin-left: $input-left-margin;
+  margin-top: 0;
+}

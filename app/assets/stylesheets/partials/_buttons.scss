@@ -1,0 +1,43 @@
+.btn-block {
+  width: 100%;
+}
+
+.btn_social {
+  color: #fff;
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 20px;
+  width: 220px;
+
+  i {
+    float: left;
+    font-size: 20px;
+  }
+}
+
+.is-facebook {
+  background-color: #4863AE;
+}
+
+.is-google {
+  background-color: #c64c38;
+
+  i {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.btn_social_icon {
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+  width: 54px;
+
+  i {
+    font-size: 28px;
+  }
+}

@@ -1,4 +1,4 @@
-class MaterialFormBuilder < ActionView::Helpers::FormBuilder
+class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, to: :@template
 
   %w[text_field password_field].each do |method_name|
@@ -13,10 +13,14 @@ class MaterialFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def submit(title = nil, options = {})
+    super(title, options.reverse_merge!(class: 'btn btn-success', id: 'submit'))
+  end
+
 private
 
   def field_label(name, options)
-    label name, options[:label]
+    label name, options[:label], class: 'control-label'
   end
 
   def errors_for(name)

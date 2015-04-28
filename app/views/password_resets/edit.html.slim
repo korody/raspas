@@ -1,12 +1,14 @@
 = provide :title, t_scoped(:title, user_name: @user.name)
 
-section class="centered-page"
-  header class="text-center"
-    h1 Nimbus
-    p class="lead" Please enter a new password in the form below.
-  div class="form-wrapper"
-    = form_for @user, url: password_reset_path do |f|
-      = hidden_field_tag :email, @user.email
-      div class="form-group"
-        = f.password_field :password, class: 'form-control', label: "New Password"
-      = submit_tag "Update Password", class: 'btn btn-lg btn-block btn-success'
+div class="col l6 s12 offset-l3"
+  div class="center-align"
+    h5 Update Password
+    p Please enter a new password in the form below.
+
+  = form_for @user, url: password_reset_path do |f|
+    = hidden_field_tag :email, @user.email
+    div class="input-field col s12"
+      i class="mdi-action-lock-outline prefix"
+      = f.password_field :password, label: "New Password"
+    div class="input-field col s12"
+      = submit_tag "Update Password", class: 'btn indigo'

@@ -54,5 +54,5 @@ ActiveRecord::Schema.define(version: 20150115164232) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
-  add_foreign_key "authentications", "users"
+  add_foreign_key "authentications", "users", on_delete: :cascade
 end

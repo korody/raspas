@@ -1,0 +1,7 @@
+.alert-danger {
+  @extend .red-text;
+}
+
+.alert-success {
+  @extend .green-text;
+}

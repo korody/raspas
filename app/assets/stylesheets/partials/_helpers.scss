@@ -1,0 +1,9 @@
+dl.unstyled {
+  dt {
+    @extend .grey-text;
+  }
+
+  dd {
+    margin: 0 0 1rem;
+  }
+}

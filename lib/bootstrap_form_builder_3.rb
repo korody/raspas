@@ -1,4 +1,4 @@
-class MaterialFormBuilder < ActionView::Helpers::FormBuilder
+class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, to: :@template
 
   %w[text_field password_field].each do |method_name|

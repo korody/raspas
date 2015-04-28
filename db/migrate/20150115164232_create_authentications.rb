@@ -21,6 +21,6 @@ class CreateAuthentications < ActiveRecord::Migration
 
     add_index :authentications, [:provider, :uid], unique: true
 
-    add_foreign_key :authentications, :users, on_cascade: :delete
+    add_foreign_key :authentications, :users, on_delete: :cascade
   end
 end

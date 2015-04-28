@@ -5,6 +5,8 @@ class PasswordResetsController < ApplicationController
   before_action :validate_email_or_username, only: :create
   before_action :get_user_or_redirect, only: [:edit, :update]
 
+  layout 'sessions'
+
   def new
   end
 

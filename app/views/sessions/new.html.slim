@@ -1,25 +1,19 @@
 = provide :title, t_scoped(:title)
 
-section class="centered-page"
-  header class="text-center"
-    h1 Nimbus
-    p class="lead" Sign in to Nimbus
+= render 'social_login'
 
-  div class="form-wrapper"
-    div class="social-signup__link"
-      = link_to "Sign in with Google", '/auth/google', class: 'btn btn-danger btn-block btn-lg'
-    div class="social-signup__link"
-      = link_to "Sign in with Facebook", '/auth/facebook', class: 'btn btn-primary btn-block btn-lg'
-    p class="lead text-center" or
-
-    h3 class="text-center" Sign in with Your Email Address
-    = form_tag login_path do
-      div class="form-group"
-        = label_tag :username, "Email or Username"
-        = text_field_tag :email_or_username, params[:email_or_username], class: 'form-control'
-      div class="form-group"
-        = label_tag :password
-        = password_field_tag :password, nil, class: 'form-control'
-      = submit_tag "Login", class: 'btn btn-success btn-lg btn-block'
-
-  p class="text-center" Don't have' an account? #{link_to "Sign up", register_path}.
+div class="col l6 s12 offset-l3"
+  h5 class="center-align" Sign in with Email
+  = form_tag login_path do
+    div class="input-field col s12"
+      i class="mdi-social-person prefix"
+      = text_field_tag :email_or_username, params[:email_or_username]
+      = label_tag :email_or_username, "Email or Username"
+    div class="input-field col s12"
+      i class="mdi-action-lock-outline prefix"
+      = password_field_tag :password, nil
+      = label_tag :password
+    div class="input-field col s6"
+      = submit_tag "Login", class: 'btn indigo'
+    div class="input-field col s6 right-align"
+      = link_to "Forgot Password", new_password_reset_path

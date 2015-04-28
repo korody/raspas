@@ -1,6 +1,6 @@
 module ApplicationHelper
   def page_title(title)
-    base_title = "COMPANYNAME Identity"
+    base_title = "Nimbus"
     if title.blank?
       base_title
     else
