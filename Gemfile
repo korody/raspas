@@ -48,6 +48,8 @@ end
 # Inluce custom gems below this line
 #
 
+gem 'tzinfo-data'
+
 gem 'slim-rails'
 gem 'rails-i18n'
 
