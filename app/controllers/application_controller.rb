@@ -6,4 +6,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   add_flash_types :danger, :success, :warning, :info
+
+private
+
+  def deny_access
+    render text: "Não autorizado.", status: :unauthorized
+  end
+
+  def redirect_back(options)
+    redirect_to :back, options
+  rescue ActionController::RedirectBackError
+    redirect_to root_path, options
+  end
 end

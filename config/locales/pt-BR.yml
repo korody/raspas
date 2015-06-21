@@ -1,16 +1,84 @@
 pt-BR:
+  activerecord:
+    attributes:
+      user:
+        display_username: Username
+        email: E-mail
+        name: Nome
+        password: Senha 
   controllers:
+    auth_registrations:
+      new:
+        not_authorized: Não autorizado.
+      create:
+        failure: Houve um problema no seu cadastro. Por favor, confira os erros no formulário.
+        not_authorized: Não autorizado.
+        success: Bem-vindo(a) ao raspas!
     authentications:
       create:
-        authentication_added: "Perfil vinculado."
-        authentication_exists: "Este perfil já está vinculado."
-        welcome_back: "Bem-vindo(a) de volta."
+        auth_exists: Autenticação realizada.
+        auth_added: "Autenticação completa com %{provider}."
+        welcome_back: Bem-vindo(a) de volta!
     registrations:
       create:
-        failure:
+        failure: Houve um problema no seu cadastro. Por favor, confira os erros no formulário.
+    password_resets:
+      create:
+        success: "As instruções foram enviadas para o e-mail %{email}."
+        user_not_found: "Nâo há registros do e-mail ou username <b>%{email}</b> no sistema."
+        value_not_provided: Por favor, forneça um e-mail ou username.
+      edit:
+        not_authorized: Não autorizado.
+        reset_expired: Sua requisição de nova senha expirou. Por favor, realize um novo requerimento.
+        user_not_found: Usuário não encontrado.
+      update:
+        failure: Não foi possível atualizar sua senha. Por favor, confira os erros no formulário.
+        not_authorized: Não autorizado.
+        reset_expired: Sua requisição de nova senha expirou. Por favor, realize um novo requerimento.
+        success: Nova senha definida com sucesso.
+        user_not_found: Usuário não encontrado.
     sessions:
       create:
-        failure:
-        success:
+        failure: E-mail ou senha fornecidos estão incorretos.
+        success: Bem-vindo(a) de volta!
+        value_not_provided: Por favor, forneça um e-mail ou username, e uma senha.
       destroy:
-        success: "Até breve!"
+        success: Você foi desconectado. Aproveite o resto do seu dia!
+    users:
+      update:
+        failure: Houve um problema na atualização. Por favor, confira os erros no formulário.
+        success: Perfil atualizado com sucesso.
+  helpers:
+    submit:
+      user:
+        create: Cadastre-se
+        update: Atualize seu perfil
+  mailers:
+    user_mailer:
+      password_reset_request:
+        subject: Requisição de nova senha
+      welcome_email:
+        subject: Bem-vindo(a)!
+  views:
+    generic:
+      wait: Aguarde
+    auth_registrations:
+      new:
+        submit_button: Finalize o cadastro
+        title: Finalize o cadastro
+    password_resets:
+      edit:
+        title: Troque sua senha
+      new:
+        title: Requisite nova senha
+    sessions:
+      new:
+        title: Entre
+    registrations:
+      new:
+        title: Cadastre-se
+    users:
+      edit:
+        title: Atualize seu perfil
+      show:
+        title: "%{user_name}"

@@ -1,13 +1,23 @@
 module UsesSecurePassword
   extend ActiveSupport::Concern
+  include TokenDigest
 
   included do
     include ActiveModel::SecurePassword
-    include Concerns::Digest
 
     RESET_EXPIRATION = 2
 
-    attr_accessor :remember_token, :confirmation_token, :reset_token
+    attr_accessor :remember_token, :reset_token, :resetting_password
+  end
+
+  class_methods do
+    def uses_secure_password(validate: true)
+      has_secure_password validations: validate
+    end
+
+    def find_by_login(login)
+      User.where("email = :login OR username = :login", login: login).first
+    end
   end
 
   def remember
@@ -15,17 +25,8 @@ module UsesSecurePassword
     update_attribute(:remember_digest, self.class.digest(remember_token))
   end
 
-  def create_confirmation_digest
-    self.confirmation_token = self.class.new_token
-    self.confirmation_digest = self.class.digest(confirmation_token)
-  end
-
   def forget
     update_attribute(:remember_digest, nil)
-  end
-
-  def confirm
-    update_columns(confirmed: true, confirmed_at: Time.zone.now)
   end
 
   def create_reset_digest
@@ -34,7 +35,8 @@ module UsesSecurePassword
   end
 
   def reset_password(password)
-    update(password: password, password_reset_token: nil, password_reset_sent_at: nil)
+    self.resetting_password = true
+    update(password: password, reset_digest: nil, reset_sent_at: nil)
   end
 
   def reset_expired?
@@ -46,18 +48,6 @@ module UsesSecurePassword
   end
 
   def validate_password?
-    new_record? || password_digest_changed? || (reset_sent_at? && !reset_expired?)
+    new_record? || password_digest_changed? || resetting_password
   end
-
-  module ClassMethods
-    def uses_secure_password(validate: true)
-      has_secure_password validations: validate
-    end
-
-    def find_by_email_or_username(value)
-      User.where("email = ? OR username = ?", value, value).first
-    end
-  end
-
-  extend ClassMethods
 end

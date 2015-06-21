@@ -1,6 +1,9 @@
 = provide :title, t_scoped(:title)
 
-div class="col l6 s12 offset-l3"
-  h5 class="center-align" Edit Your Profile
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider u-mv-20"
+  p class="lead" Edite seu perfil
   = form_for @user, url: profile_path do |f|
     = render 'registrations/user_fields', f: f
+  div class="col s12"
+    div class="divider u-mv-30"

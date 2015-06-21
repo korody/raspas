@@ -1,14 +1,12 @@
-module Concerns::Digest
-  def self.included(base)
-    base.extend(ClassMethods)
-  end
+module TokenDigest
+  extend ActiveSupport::Concern
 
   def authenticated?(attribute, token)
     digest = send(attribute)
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  module ClassMethods
+  class_methods do
     def digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
       BCrypt::Password.create(string, cost: cost)

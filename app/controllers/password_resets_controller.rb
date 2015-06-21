@@ -2,8 +2,8 @@ using StringExtensions
 
 class PasswordResetsController < ApplicationController
   before_action :ensure_logged_out
-  before_action :validate_email_or_username, only: :create
-  before_action :get_user_or_redirect, only: [:edit, :update]
+  before_action :validate_login, only: :create
+  before_action :set_user_or_redirect, only: [:edit, :update]
 
   layout 'sessions'
 
@@ -11,12 +11,12 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    if @user = User.find_by_email_or_username(params[:email_or_username].sanitize)
+    if @user = User.find_by_login(params[:login].sanitize)
       @user.create_reset_digest
-      UserMailer.password_reset_request(@user).deliver_now
+      UserMailer.password_reset_request(@user, token: @user.reset_token).deliver_later
       redirect_to login_path, success: t_scoped(:success, email: @user.email)
     else
-      flash.now[:danger] = t_scoped(:user_not_found, email: params[:email_or_username]).html_safe
+      flash.now[:danger] = t_scoped(:user_not_found, email: params[:login]).html_safe
       render :new
     end
   end
@@ -25,7 +25,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if @user.update(password: params[:user][:password])
+    if @user.reset_password(params[:user][:password])
       redirect_to login_path, success: t_scoped(:success)
     else
       flash.now[:danger] = t_scoped(:failure)
@@ -35,15 +35,15 @@ class PasswordResetsController < ApplicationController
 
 private
 
-  def validate_email_or_username
-    if params[:email_or_username].blank?
+  def validate_login
+    if params[:login].blank?
       flash.now[:danger] = t_scoped(:value_not_provided)
       render :new
     end
   end
 
-  def get_user_or_redirect
-    if @user = User.find_by_email_or_username(params[:email].sanitize)
+  def set_user_or_redirect
+    if @user = User.find_by_login(params[:email].sanitize)
       if @user.reset_expired?
         redirect_user :reset_expired
       elsif !@user.authenticated?(:reset_digest, params[:id])

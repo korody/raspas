@@ -10,12 +10,11 @@ class AuthRegistrationsController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    @user.add_auth(@auth)
+    @user = UserCreationService.create(user_params, @auth)
 
-    if @user.save
+    if @user.persisted?
       log_in @user
-      redirect_to profile_path, success: t_scoped(:success)
+      redirect_back_or root_path
     else
       flash.now[:danger] = t_scoped(:failure)
       render :new
@@ -25,14 +24,10 @@ class AuthRegistrationsController < ApplicationController
 private
 
   def validate_authentication
-    if params[:auth_id].blank? || params[:access_token].blank?
-      redirect_to login_path
-    else
-      @auth = Authentication.find(params[:auth_id])
-
-      unless @auth.authenticated?(:access_token_digest, params[:access_token])
-        redirect_to login_path, danger: t_scoped(:not_authorized)
-      end
+    if params[:access_token].blank?
+      deny_access
+    else @auth = Authentication.find(params[:auth_id])
+      deny_access unless @auth.authenticated?(:access_token_digest, params[:access_token])
     end
   end
 end

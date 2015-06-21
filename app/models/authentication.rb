@@ -1,5 +1,5 @@
 class Authentication < ActiveRecord::Base
-  include Concerns::Digest
+  include TokenDigest
 
   attr_accessor :access_token
 

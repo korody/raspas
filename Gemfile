@@ -71,3 +71,5 @@ gem 'i18n_lazy_scope'
 gem 'rack-mini-profiler'
 
 gem 'materialize-sass'
+
+gem 'mandrill-api', '~> 1.0.51', require: "mandrill"

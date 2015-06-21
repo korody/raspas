@@ -1,26 +1,11 @@
 = provide :title, t_scoped(:title)
 
-div class="col l6 s12 offset-l3"
-  div class="center-align"
-    h5 Olá #{@user.name}!
-    p Por favor, confirme suas informações abaixo.
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider"
+  p class="lead" Olá #{@user.first_name}!
+  p class="help-block" Por favor, confirme suas informações abaixo.
   = form_for @user, url: auth_registrations_path do |f|
     = hidden_field_tag :auth_id, params[:auth_id]
     = hidden_field_tag :access_token, params[:access_token]
     = f.hidden_field :photo
-    div class="input-field col s12"
-      i class="mdi-action-face-unlock prefix"
-      = f.text_field :name
-    div class="input-field col s12"
-      i class="mdi-communication-email prefix"
-      = f.text_field :email
-    div class="input-field col s12"
-      i class="mdi-social-person prefix"
-      = f.text_field :display_username
-      p class="help-block" Adicione um nome de usuário para seu id único do Nimbus.
-    div class="input-field col s12"
-      i class="mdi-action-lock-outline prefix"
-      = f.password_field :password
-      p class="help-block" Adicione uma senha para proteger sua conta.
-    div class="input-field col s12"
-      = f.submit class: 'btn indigo'
+    = render 'users/fields', f: f

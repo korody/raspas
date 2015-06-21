@@ -1,11 +1,15 @@
 = provide :title, t_scoped(:title)
 
-div class="col l6 s12 offset-l3"
-  h5 class="center-align" Reset Password
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider"
+  p class="lead" Troque sua senha
   = form_tag password_resets_path do
     div class="input-field col s12"
       i class="mdi-communication-email prefix"
-      = label_tag :email_or_username, "Email or Username"
-      = text_field_tag :email_or_username, params[:email_or_username]
+      = label_tag :login, "E-mail ou Username"
+      = text_field_tag :login, params[:login], class: 'form-control input-lg'
     div class="input-field col s12"
-      = submit_tag "Send Email", class: 'btn indigo'
+      = button_tag "Requisite nova senha", class: 'btn', data: { disable_with: disable(:wait) }
+    div class="col s12"
+      div class="divider u-mv-30"
+      p class="grey-text center-align" Lembrou sua senha? #{link_to 'Entre', login_path}.

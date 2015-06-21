@@ -2,18 +2,21 @@
 
 = render 'social_login'
 
-div class="col l6 s12 offset-l3"
-  h5 class="center-align" Sign in with Email
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider u-mv-20"
+  p class="lead" Ou entre com seu e-mail
   = form_tag login_path do
     div class="input-field col s12"
       i class="mdi-social-person prefix"
-      = text_field_tag :email_or_username, params[:email_or_username]
-      = label_tag :email_or_username, "Email or Username"
+      = text_field_tag :login, params[:login]
+      = label_tag :login, "E-mail ou Username"
     div class="input-field col s12"
       i class="mdi-action-lock-outline prefix"
       = password_field_tag :password, nil
-      = label_tag :password
-    div class="input-field col s6"
-      = submit_tag "Login", class: 'btn indigo'
-    div class="input-field col s6 right-align"
-      = link_to "Forgot Password", new_password_reset_path
+      = label_tag :password, "Senha"
+    div class="input-field col s12"
+      = submit_tag "Entre", class: 'btn'
+  div class="col s12"
+    div class="divider u-mv-30"
+    p class="grey-text center-align" Esqueceu sua senha? #{link_to 'Troque', new_password_reset_path}.
+    p class="grey-text center-align" Ainda não possui uma conta? #{link_to 'Cadastre-se', register_path}.

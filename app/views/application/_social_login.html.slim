@@ -1,11 +1,10 @@
-div class="col s12 center-align"
-  p class="grey-text" Connect with
-  = link_to '/auth/google', class: 'btn_social is-google' do
-    i class="icomoon-google-plus"
-    span Sign in with Google
-  = link_to '/auth/facebook', class: 'btn_social is-facebook' do
-    i class="icomoon-facebook"
-    span Sign in with Facebook
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider"
+  p class="lead" entre com sua rede favorita
 
-div class="col s12 center-align"
-  p class="grey-text" Or
+  = link_to '/auth/facebook', class: 'btn-facebook' do
+    span Facebook
+  = link_to '/auth/google', class: 'btn-google' do
+    span Google
+  = link_to '/auth/twitter', class: 'btn-twitter' do
+    span Twitter

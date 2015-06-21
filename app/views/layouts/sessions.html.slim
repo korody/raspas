@@ -4,9 +4,10 @@ html
     title = page_title yield(:title)
     = render 'assets'
   body
-    = render 'sessions/header'
     = render 'flash'
+    div class="sessions-logo"
+      = link_to image_tag('logo.png', width: 120), root_path
     main
-      div class="container section"
+      div class="container"
         div class="row"
           = yield

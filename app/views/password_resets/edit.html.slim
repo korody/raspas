@@ -1,14 +1,14 @@
 = provide :title, t_scoped(:title, user_name: @user.name)
 
-div class="col l6 s12 offset-l3"
-  div class="center-align"
-    h5 Update Password
-    p Please enter a new password in the form below.
-
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider"
+  p class="lead" Troque sua senha
   = form_for @user, url: password_reset_path do |f|
     = hidden_field_tag :email, @user.email
     div class="input-field col s12"
       i class="mdi-action-lock-outline prefix"
       = f.password_field :password, label: "New Password"
     div class="input-field col s12"
-      = submit_tag "Update Password", class: 'btn indigo'
+      = submit_tag "Atualize sua senha", class: 'btn indigo'
+    div class="col s12"
+      div class="divider u-mv-30"

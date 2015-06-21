@@ -1,0 +1,24 @@
+%social-button-defaults {
+  @extend .btn-flat;
+  font-weight: 400;
+  margin: 20px;
+}
+
+.btn-twitter {
+  @extend %social-button-defaults;
+  color: #55ACEE;
+  border-color: #55ACEE;
+}
+
+.btn-google {
+  @extend %social-button-defaults;
+  color: #c64c38;
+  border-color: #c64c38;
+}
+
+.btn-facebook {
+//   @extend .indigo, .darken-2;
+  @extend %social-button-defaults;
+  color: #4863AE;
+  border-color: #4863AE;
+}

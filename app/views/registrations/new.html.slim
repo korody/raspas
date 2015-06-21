@@ -2,7 +2,11 @@
 
 = render 'social_login'
 
-div class="col l6 s12 offset-l3"
-  h5 class="center-align" Register with Email
+div class="col l6 s12 offset-l3 center-align"
+  div class="divider u-mv-20"
+  p class="lead" Ou cadastre-se com seu e-mail
   = form_for @user, url: register_path do |f|
     = render 'registrations/user_fields', f: f
+  div class="col s12"
+    div class="divider u-mv-30"
+    p class="grey-text center-align" Já possui uma conta? #{link_to 'Entre', login_path}.

@@ -29,6 +29,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def first_name
+    name.split(' ').first
+  end
+
+  def to_s
+    name
+  end
+  
 private
 
   def set_username
