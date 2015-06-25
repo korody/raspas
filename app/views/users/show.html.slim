@@ -1,16 +1,16 @@
 = provide :title, t_scoped(:title, user_name: @user.name)
 
-div class="col s4"
-  div class="card"
-    div class="card-image"
-      = image_tag @user.photo
-      h5 class="card-title" = @user.name
-    div class="card-content"
-      dl.unstyled
-        dt Email
-        dd = @user.email
-        dt Username
-        dd = @user.username
-    div class="card-action"
-      = link_to "Edite seu perfil", edit_profile_path
-      = link_to "Sair", logout_path, method: :delete
+/ div class="col s4"
+/   div class="card"
+/     div class="card-image"
+/       = image_tag @user.photo
+/       h5 class="card-title" = @user.name
+/     div class="card-content"
+/       dl.unstyled
+/         dt Email
+/         dd = @user.email
+/         dt Username
+/         dd = @user.username
+/     div class="card-action"
+/       = link_to "Edite seu perfil", edit_profile_path
+/       = link_to "Sair", logout_path, method: :delete

@@ -1,11 +1,11 @@
-@import "materialize";
+@import "materialize_components";
 
 @import "components/base";
 @import "partials/base";
 @import "utilities/base";
 
 body {
-  background-color: #f4f4f4;
+  background-color: #FEF8F2;
 }
 
 .border {
@@ -29,12 +29,7 @@ body {
   border: 1px solid;
 }
 
- header, main, footer {
-  padding-left: 240px;
-}
-
-@media only screen and (max-width : 992px) {
-  header, main, footer {
-    padding-left: 0;
-  }
+.logo {
+  margin: 20px;
+  width: 60px;
 }
