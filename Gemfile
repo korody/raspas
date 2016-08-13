@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.0.0'
+# ruby '2.0.0'
 
 gem 'rails', '4.0.2'
 gem 'bcrypt-ruby', '~> 3.1.2'
@@ -15,7 +15,7 @@ gem "will_paginate"
 gem "carrierwave"
 gem "fog", "~> 1.3.1"
 gem 'aws-s3'
-gem "rmagick", '2.13.2'  
+gem "rmagick", '2.15.4'  
 
 # Asset template engines
 gem 'sass-rails', '~> 4.0.0'
@@ -39,4 +39,6 @@ gem 'protected_attributes'
 
 gem 'rails_12factor', group: :production
 
-gem 'unicorn'
+platforms :ruby do
+  gem 'unicorn'
+end
