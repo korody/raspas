@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @title = "passe seu conhecimento adiante"
     @user = User.new
     @feed_items = Micropost.page(params[:page]).order('created_at DESC')
-    @authors = Author.scoped(order: 'authors.created_at DESC')
+    @authors = Author.scoped.order('created_at DESC')
     @users = User.scoped(order: 'users.created_at DESC')
     @tags = Tag.scoped(order: 'tags.created_at DESC')
     @origins = Origin.scoped(order: 'origins.created_at DESC')
