@@ -5,7 +5,7 @@ class OriginsController < ApplicationController
 
   def index
     @title = "Pensamentos e Frases de livros, músicas, poemas e filmes"
-    @origins = eval("#{params[:controller].classify}.paginate(page: params[:page], order: :name)")
+    @origins = eval("#{params[:controller].classify}.page(params[:page]).order('name')")
     # @origins = params[:type].constantize.all
     # @origins = Origin.scoped(order: :name)
     # @origins = origin.paginate(:page => params[:page])

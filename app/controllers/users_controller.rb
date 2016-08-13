@@ -6,7 +6,7 @@
   def index
     @title = "usuários"
     #@users = User.scoped(order: :name)
-    @users = User.paginate(page: params[:page], order: :name)
+    @users = User.page(params[:page]).order('name')
     @new_micropost = Micropost.new
       # fresh_when etag: @users, public: false
   end
@@ -159,7 +159,7 @@
   def following
     @title = "seguindo"
     @user = User.find(params[:id])
-    @following = @user.following.paginate(page: params[:page], order: :name)
+    @following = @user.following.page(params[:page]).order('name')
     @users_intro = User.all
     @new_micropost = Micropost.new
     @authors = Author.all
@@ -170,7 +170,7 @@
   def followers
     @title = "seguidores"
     @user = User.find(params[:id])
-    @followers = @user.followers.paginate(page: params[:page], order: :name)
+    @followers = @user.followers.page(params[:page]).order('name')
     @new_micropost = Micropost.new
     render 'show_followers'
   end
@@ -178,7 +178,7 @@
   def idols
     @title = "ídolos"
     @user = User.find(params[:id])
-    @idols = @user.idols.paginate(page: params[:page], order: :name)
+    @idols = @user.idols.page(params[:page]).order('name')
     @author_favourites = @user.authors
     @authors_intro = Author.all
     @new_micropost = Micropost.new

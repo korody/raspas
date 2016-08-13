@@ -4,7 +4,7 @@ html { font-size:100%; }
 body {
   background: #fff;
   color: #2F4F4F;
-  font-family: "Helvetica Light", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", "Helvetica Light", Helvetica, Arial, sans-serif;
   font-size: 75%;
 }
 
@@ -14,7 +14,7 @@ input {
 
 textarea {
   color: #2F4F4F;
-  font-family: "Helvetica Light", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", "Helvetica Light", Helvetica, Arial, sans-serif;
   font-size: 120%;
   line-height: 1.5em;
 }
